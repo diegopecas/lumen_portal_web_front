@@ -13,6 +13,25 @@
   --gray-light: #f5f5f5;
   --cream: #FFF8E7;
   --white: #ffffff;
+
+  // Header fijo
+  app-header-web {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  // Hero Section con padding-top para compensar el header fijo
+  .hero-section {
+    padding-top: 300px; // Más espacio para el header fijo en desktop
+    
+    @media (max-width: 768px) {
+      padding-top: 220px; // Más espacio en móvil también
+    }
+  }
 }
 
 // Container
@@ -54,6 +73,7 @@
   background: linear-gradient(135deg, var(--cream) 0%, var(--white) 50%, var(--gray-light) 100%);
   position: relative;
   overflow: hidden;
+  margin-top: 0; // Ya tiene el padding-top en el contenedor
 
   &::before {
     content: '';
