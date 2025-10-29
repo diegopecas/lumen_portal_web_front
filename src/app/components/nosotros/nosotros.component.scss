@@ -1,0 +1,242 @@
+.nosotros-container {
+  min-height: 100vh;
+  background: #ffffff;
+  
+  // Variables
+  --gold: #D4AF37;
+  --gold-light: #E6C757;
+  --gold-dark: #B8941F;
+  --black: #1a1a1a;
+  --gray-dark: #333333;
+  --gray-light: #666666;
+  --cream: #FFF8E7;
+}
+
+// Container
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Sobre la Institución
+.sobre-institucion {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .text-content {
+    h2 {
+      font-size: 2.5rem;
+      color: var(--black);
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--gray-dark);
+      margin-bottom: 20px;
+    }
+  }
+
+  .image-content {
+    img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// Características
+.caracteristicas {
+  padding: 80px 20px;
+  background: white;
+
+  h2 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--black);
+    margin-bottom: 60px;
+
+    span {
+      color: var(--gold);
+    }
+  }
+
+  .caracteristicas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .caracteristica-card {
+    background: #f9f9f9;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .caracteristica-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: var(--black);
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+  }
+}
+
+// Valores
+.valores {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+
+  h2 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--black);
+    margin-bottom: 20px;
+
+    span {
+      color: var(--gold);
+    }
+  }
+
+  .valores-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--gray-dark);
+    margin-bottom: 60px;
+  }
+
+  .valores-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .valor-card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    text-align: center;
+
+    .valor-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+  }
+}
+
+// Equipo
+.equipo {
+  padding: 80px 20px;
+  background: white;
+
+  h2 {
+    text-align: center;
+    font-size: 3rem;
+    color: var(--black);
+    margin-bottom: 60px;
+
+    span {
+      color: var(--gold);
+    }
+  }
+
+  .equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+  }
+
+  .team-card {
+    background: #f9f9f9;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-emoji {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .team-info {
+      h3 {
+        font-size: 1.5rem;
+        color: var(--black);
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: var(--gray-dark);
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .sobre-institucion,
+  .caracteristicas,
+  .valores,
+  .equipo {
+    padding: 60px 20px;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  .valores-grid {
+    gap: 30px;
+  }
+}

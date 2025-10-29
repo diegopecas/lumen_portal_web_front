@@ -1,0 +1,84 @@
+<div class="nosotros-container">
+  <!-- Header -->
+  <app-header-web 
+    [titulo]="'Sobre Nosotros'" 
+    [breadcrumbs]="['Inicio', 'Nosotros']"
+    [rutaVolver]="'/'">
+  </app-header-web>
+
+  <!-- Sobre la Institución -->
+  <section class="sobre-institucion">
+    <div class="container">
+      <div class="content-grid">
+        <div class="text-content">
+          <h2>Educación de calidad en un entorno mágico</h2>
+          <p>
+            Somos una comunidad joven ubicada en la vereda de Fonquetá, Chía, donde la 
+            naturaleza y la educación se unen para crear un ambiente único de aprendizaje.
+          </p>
+          <p>
+            Nuestras instalaciones campestres ofrecen espacios verdes seguros y estimulantes, 
+            diseñados especialmente para niños desde los primeros meses hasta los 5 años de edad.
+          </p>
+          <p>
+            Contamos con sala cuna y aulas equipadas, atendidas por profesionales altamente 
+            capacitados y comprometidos con brindar educación de calidad a precios justos.
+          </p>
+        </div>
+        <div class="image-content">
+          <img src="assets/images/imagen_principal.jpg" alt="Liceo Lumen - Instalaciones">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Por qué elegir Liceo Lumen? -->
+  <section class="caracteristicas">
+    <div class="container">
+      <h2>¿Por qué elegir <span>Liceo Lumen?</span></h2>
+      
+      <div class="caracteristicas-grid">
+        <div class="caracteristica-card" *ngFor="let carac of caracteristicas">
+          <div class="caracteristica-icon">{{ carac.icon }}</div>
+          <h3>{{ carac.titulo }}</h3>
+          <p>{{ carac.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="valores">
+    <div class="container">
+      <h2>Nuestros <span>Valores</span></h2>
+      <p class="valores-intro">
+        Cada valor es una luz que guía nuestro camino y forma el carácter de nuestros estudiantes
+      </p>
+      
+      <div class="valores-grid">
+        <div class="valor-card" *ngFor="let valor of valores">
+          <div class="valor-icon">{{ valor.icon }}</div>
+          <h3 [style.color]="valor.color">{{ valor.titulo }}</h3>
+          <p>{{ valor.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo Fundador -->
+  <section class="equipo">
+    <div class="container">
+      <h2>Nuestro <span>Equipo Fundador</span></h2>
+      
+      <div class="equipo-grid">
+        <div class="team-card" *ngFor="let miembro of equipo">
+          <div class="team-emoji">{{ miembro.emoji }}</div>
+          <div class="team-info">
+            <h3>{{ miembro.nombre }}</h3>
+            <p>{{ miembro.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

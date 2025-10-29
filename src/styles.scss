@@ -1,0 +1,30 @@
+/* Estilos Globales - Liceo Lumen */
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Variables CSS globales */
+:root {
+  --gold: #D4AF37;
+  --gold-light: #E6C757;
+  --gold-dark: #B8941F;
+  --black: #1a1a1a;
+  --gray-dark: #333333;
+  --gray-light: #666666;
+  --white: #ffffff;
+  --cream: #FFF8E7;
+}

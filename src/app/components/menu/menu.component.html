@@ -1,0 +1,113 @@
+<div class="constellation-menu" [attr.data-theme]="currentTheme.name">
+  <!-- Canvas de efectos de fondo -->
+  <canvas #effectCanvas class="effect-canvas"></canvas>
+
+  <!-- Canvas para líneas de constelación -->
+  <canvas #constellationCanvas class="constellation-canvas"></canvas>
+
+  <!-- ☁️ NUBES FLOTANTES SUTILES -->
+  <div class="floating-clouds">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+    <div class="cloud cloud-4"></div>
+    <div class="cloud cloud-5"></div>
+  </div>
+
+  <!-- Estrellas de fondo -->
+  <div class="stars-background">
+    <div *ngFor="let star of stars" class="star" 
+         [style.top.%]="star.top" 
+         [style.left.%]="star.left"
+         [style.width.px]="star.size" 
+         [style.height.px]="star.size" 
+         [style.animation-duration.s]="star.duration">
+    </div>
+  </div>
+
+  <!-- Partículas flotantes temáticas -->
+  <div class="floating-particles">
+    <div *ngFor="let particle of floatingParticles" 
+         class="theme-particle" 
+         [style.left.%]="particle.x"
+         [style.top.%]="particle.y" 
+         [style.animation-delay.s]="particle.delay"
+         [style.animation-duration.s]="particle.duration">
+      {{ particle.icon }}
+    </div>
+  </div>
+
+  <!-- Título (solo móvil) -->
+  <div class="menu-title-mobile" *ngIf="isMobile">
+    <h1>{{ currentTheme.title }}</h1>
+    <p>{{ currentTheme.subtitle }}</p>
+  </div>
+
+  <!-- PORTAL CENTRAL 3D -->
+  <div class="central-portal" 
+       [class.mobile]="isMobile" 
+       (mouseenter)="onPortalHover(true)"
+       (mouseleave)="onPortalHover(false)">
+
+    <!-- Anillos orbitales -->
+    <div class="orbital-ring ring-1"></div>
+    <div class="orbital-ring ring-2"></div>
+    <div class="orbital-ring ring-3"></div>
+
+    <!-- Portal sphere -->
+    <div class="portal-sphere">
+      <div class="sphere-inner">
+        <img src="assets/images/logo_lumen_3d_inclinado.png" alt="Logo Liceo Lumen" class="portal-logo" />
+      </div>
+      <div class="energy-core"></div>
+    </div>
+
+    <!-- Partículas orbitando el portal -->
+    <div class="portal-particles">
+      <div *ngFor="let p of portalParticles" 
+           class="portal-particle" 
+           [style.animation-delay.s]="p.delay">
+      </div>
+    </div>
+
+    <!-- Título central (desktop) -->
+    <div class="portal-title" *ngIf="!isMobile">
+      <h2>{{ currentTheme.title }}</h2>
+      <p>{{ currentTheme.subtitle }}</p>
+    </div>
+  </div>
+
+  <!-- OPCIONES DEL MENÚ (CONSTELACIÓN) -->
+  <div class="constellation-options" [class.mobile]="isMobile">
+
+    <div *ngFor="let option of menuOptions; let i = index"
+         class="menu-option"
+         [class]="'option-' + (i + 1)"
+         [style.--orbit-angle]="option.angle + 'deg'"
+         [style.--orbit-radius]="option.radius + 'px'"
+         (click)="selectOption(option.route, i)"
+         (mouseenter)="highlightOption(i)"
+         (mouseleave)="unhighlightOption()"
+         [class.highlighted]="highlightedIndex === i">
+      
+      <div class="option-glow"></div>
+      <div class="option-content">
+        <img [src]="option.icon" class="option-icon-img" [alt]="option.label" />
+        <span class="option-label">{{ option.label }}</span>
+      </div>
+      <div class="option-pulse"></div>
+    </div>
+
+  </div>
+
+  <!-- Partículas de explosión al hacer click -->
+  <div class="explosion-particles">
+    <div *ngFor="let particle of explosionParticles" 
+         class="explosion-particle" 
+         [style.left.px]="particle.x"
+         [style.top.px]="particle.y" 
+         [style.--angle]="particle.angle + 'deg'">
+      {{ particle.icon }}
+    </div>
+  </div>
+</div>

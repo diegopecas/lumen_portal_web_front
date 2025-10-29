@@ -1,0 +1,27 @@
+<div class="header-web" [attr.data-theme]="currentTheme.name">
+  <div class="theme-glow"></div>
+  
+  <div class="header-content">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs" *ngIf="breadcrumbs.length > 0">
+      <span *ngFor="let crumb of breadcrumbs; let last = last">
+        <span class="crumb">{{ crumb }}</span>
+        <span class="separator" *ngIf="!last"> › </span>
+      </span>
+    </div>
+
+    <!-- Título -->
+    <h1 class="header-title">{{ titulo }}</h1>
+
+    <!-- Botón Volver -->
+    <button class="btn-volver" (click)="volver()">
+      <span class="btn-icon">←</span>
+      <span class="btn-label">Volver al Menú</span>
+    </button>
+  </div>
+
+  <!-- Partículas decorativas -->
+  <div class="header-particles">
+    <span class="particle" *ngFor="let p of particles">{{ p }}</span>
+  </div>
+</div>

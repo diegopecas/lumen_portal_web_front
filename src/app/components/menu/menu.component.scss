@@ -1,0 +1,951 @@
+// Variables CSS por tema
+.constellation-menu {
+  --bg-gradient: linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 50%, #2d1b3d 100%);
+  --primary-color: #ff8c00;
+  --secondary-color: #8a2be2;
+  --accent-color: #dda0dd;
+  --glow-primary: rgba(255, 140, 0, 0.8);
+  --glow-secondary: rgba(138, 43, 226, 0.8);
+  --cloud-color: rgba(138, 43, 226, 0.08);
+
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.5s ease;
+}
+
+// Temas
+.constellation-menu[data-theme="halloween"] {
+  --bg-gradient: linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 50%, #2d1b3d 100%);
+  --primary-color: #ff8c00;
+  --secondary-color: #8a2be2;
+  --accent-color: #dda0dd;
+  --glow-primary: rgba(255, 140, 0, 0.8);
+  --glow-secondary: rgba(138, 43, 226, 0.8);
+  --cloud-color: rgba(138, 43, 226, 0.08);
+}
+
+.constellation-menu[data-theme="christmas"] {
+  --bg-gradient: linear-gradient(to bottom, #0a1428 0%, #1a2850 50%, #2a3c78 100%);
+  --primary-color: #e0f4ff;
+  --secondary-color: #4dd0ff;
+  --accent-color: #ffffff;
+  --glow-primary: rgba(224, 244, 255, 0.9);
+  --glow-secondary: rgba(77, 208, 255, 0.9);
+  --cloud-color: rgba(224, 244, 255, 0.15);
+}
+
+.constellation-menu[data-theme="valentine"] {
+  --bg-gradient: linear-gradient(to bottom, #2d0a1e 0%, #4a0a2e 50%, #6d1040 100%);
+  --primary-color: #ff1493;
+  --secondary-color: #ff69b4;
+  --accent-color: #ffb6c1;
+  --glow-primary: rgba(255, 20, 147, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(255, 105, 180, 0.08);
+}
+
+.constellation-menu[data-theme="new-year"] {
+  --bg-gradient: linear-gradient(to bottom, #0a0520 0%, #1a1040 50%, #2d1560 100%);
+  --primary-color: #ffd700;
+  --secondary-color: #ff1493;
+  --accent-color: #00ffff;
+  --glow-primary: rgba(255, 215, 0, 0.8);
+  --glow-secondary: rgba(255, 20, 147, 0.8);
+  --cloud-color: rgba(255, 215, 0, 0.06);
+}
+
+.constellation-menu[data-theme="spring"] {
+  --bg-gradient: linear-gradient(to bottom, #1a3a1a 0%, #2d5a2d 50%, #407a40 100%);
+  --primary-color: #32cd32;
+  --secondary-color: #ff69b4;
+  --accent-color: #ffff00;
+  --glow-primary: rgba(50, 205, 50, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(50, 205, 50, 0.06);
+}
+
+.constellation-menu[data-theme="colombia-day"] {
+  --bg-gradient: linear-gradient(to bottom, #1a1a3a 0%, #2a2a5a 50%, #3a3a7a 100%);
+  --primary-color: #fcd116;
+  --secondary-color: #003893;
+  --accent-color: #ce1126;
+  --glow-primary: rgba(252, 209, 22, 0.8);
+  --glow-secondary: rgba(0, 56, 147, 0.8);
+  --cloud-color: rgba(252, 209, 22, 0.06);
+}
+
+// ☁️ NUBES FLOTANTES
+.floating-clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  background: var(--cloud-color);
+  border-radius: 100px;
+  opacity: 0;
+  filter: blur(40px);
+  animation: cloudFloat linear infinite;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: var(--cloud-color);
+    border-radius: 100px;
+  }
+
+  &::before {
+    width: 50%;
+    height: 80%;
+    top: -30%;
+    left: 10%;
+  }
+
+  &::after {
+    width: 60%;
+    height: 70%;
+    top: -20%;
+    right: 10%;
+  }
+
+  &.cloud-1 {
+    width: 200px;
+    height: 80px;
+    top: 15%;
+    left: -250px;
+    animation-duration: 120s;
+    animation-delay: 0s;
+  }
+
+  &.cloud-2 {
+    width: 300px;
+    height: 100px;
+    top: 45%;
+    left: -350px;
+    animation-duration: 150s;
+    animation-delay: 30s;
+  }
+
+  &.cloud-3 {
+    width: 180px;
+    height: 70px;
+    top: 70%;
+    left: -230px;
+    animation-duration: 130s;
+    animation-delay: 60s;
+  }
+
+  &.cloud-4 {
+    width: 250px;
+    height: 90px;
+    top: 25%;
+    left: -300px;
+    animation-duration: 140s;
+    animation-delay: 90s;
+  }
+
+  &.cloud-5 {
+    width: 220px;
+    height: 85px;
+    top: 55%;
+    left: -270px;
+    animation-duration: 125s;
+    animation-delay: 45s;
+  }
+}
+
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.6;
+  }
+  95% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(calc(100vw + 400px));
+    opacity: 0;
+  }
+}
+
+// Canvas
+.effect-canvas,
+.constellation-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.constellation-canvas {
+  z-index: 5;
+}
+
+.stars-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle infinite;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.floating-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.theme-particle {
+  position: absolute;
+  font-size: 25px;
+  opacity: 0.5;
+  animation: floatParticle ease-in-out infinite;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+// Título móvil - TIPOGRAFÍA ELEGANTE
+.menu-title-mobile {
+  position: fixed;  
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 999;
+  width: 100%;
+  padding: 10px 20px;
+  
+  h1 {
+    color: var(--primary-color);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 28px;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 0 0 20px var(--glow-primary);
+    letter-spacing: 3px;
+    margin: 0;
+  }
+
+  p {
+    color: var(--accent-color);
+    font-size: 13px;
+    margin-top: 3px;
+    font-family: 'Italiana', 'Georgia', serif;
+    text-shadow: 0 0 10px var(--glow-secondary);
+    letter-spacing: 4px;
+  }
+}
+
+// PORTAL CENTRAL 3D
+.central-portal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  z-index: 20;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  &.mobile {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+
+    &:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+  }
+}
+
+.orbital-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.3;
+
+  &.ring-1 {
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%) rotateX(60deg);
+    animation: orbitRotate 8s linear infinite;
+  }
+
+  &.ring-2 {
+    width: 130%;
+    height: 130%;
+    transform: translate(-50%, -50%) rotateX(60deg) rotateY(30deg);
+    animation: orbitRotate 10s linear infinite reverse;
+    border-color: var(--secondary-color);
+  }
+
+  &.ring-3 {
+    width: 110%;
+    height: 110%;
+    transform: translate(-50%, -50%) rotateX(60deg) rotateY(-30deg);
+    animation: orbitRotate 12s linear infinite;
+    border-color: var(--accent-color);
+  }
+}
+
+.portal-sphere {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: portalPulse 4s ease-in-out infinite;
+}
+
+.sphere-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(15px);
+  border: 3px solid var(--primary-color);
+  box-shadow:
+    0 0 60px var(--glow-primary),
+    0 0 120px var(--glow-secondary),
+    inset 0 0 40px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sphere3D 15s linear infinite;
+  transform-style: preserve-3d;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: conic-gradient(var(--primary-color),
+        var(--secondary-color),
+        var(--accent-color),
+        var(--primary-color));
+    opacity: 0.3;
+    animation: rotate 8s linear infinite;
+    filter: blur(20px);
+    z-index: -1;
+  }
+}
+
+.portal-logo {
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.9));
+  animation: logoFloat 4s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+.energy-core {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary-color), transparent);
+  opacity: 0.6;
+  animation: energyPulse 2s ease-in-out infinite;
+  filter: blur(15px);
+}
+
+.portal-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.portal-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--glow-primary);
+  animation: portalOrbit 4s linear infinite;
+  opacity: 0.8;
+
+  &:nth-child(2n) {
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px var(--glow-secondary);
+    animation-duration: 5s;
+  }
+
+  &:nth-child(3n) {
+    animation-duration: 6s;
+    animation-direction: reverse;
+  }
+}
+
+// Título del portal - TIPOGRAFÍA ELEGANTE
+.portal-title {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+
+  h2 {
+    color: var(--primary-color);
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 32px;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 0 0 20px var(--glow-primary);
+    letter-spacing: 4px;
+    margin: 0;
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  p {
+    color: var(--accent-color);
+    font-size: 16px;
+    margin-top: 5px;
+    font-family: 'Italiana', 'Georgia', serif;
+    text-shadow: 0 0 10px var(--glow-secondary);
+    letter-spacing: 5px;
+  }
+}
+
+// OPCIONES CONSTELACIÓN
+.constellation-options {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  &.mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 220px 20px 100px;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
+
+.menu-option {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: all;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  transform:
+    translate(-50%, -50%) rotate(var(--orbit-angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--orbit-angle))) scale(0.8);
+
+  animation: optionAppear 1s ease-out forwards;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%) scaleY(-0.5);
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    opacity: 0.15;
+    filter: blur(8px);
+    pointer-events: none;
+    border-radius: 20px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
+    z-index: -1;
+  }
+
+  @for $i from 1 through 8 {
+    &.option-#{$i} {
+      animation-delay: #{$i * 0.15}s;
+    }
+  }
+
+  &.highlighted {
+    transform:
+      translate(-50%, -50%) 
+      rotate(var(--orbit-angle)) 
+      translateX(calc(var(--orbit-radius) - 30px)) 
+      rotate(calc(-1 * var(--orbit-angle))) 
+      perspective(1000px)
+      rotateX(-10deg)
+      rotateY(8deg)
+      scale(1.25)
+      translateZ(50px);
+    z-index: 50;
+
+    .option-glow {
+      opacity: 1;
+      transform: scale(2.5);
+    }
+
+    .option-pulse {
+      animation: pulseOut 1s ease-out infinite;
+    }
+
+    .option-content {
+      box-shadow:
+        0 30px 100px var(--glow-secondary),
+        0 40px 120px rgba(0, 0, 0, 0.7),
+        inset 0 0 60px rgba(255, 255, 255, 0.25),
+        inset -10px -10px 25px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  .mobile & {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    animation: mobileSlideIn 0.5s ease-out forwards;
+    width: 100%;
+    opacity: 0;
+
+    @for $i from 1 through 8 {
+      &.option-#{$i} {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}
+
+.option-glow {
+  position: absolute;
+  inset: -25px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-primary), transparent 70%);
+  opacity: 0;
+  transition: all 0.4s;
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.option-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 2px solid var(--primary-color);
+  box-shadow:
+    0 10px 40px var(--glow-primary),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(255, 255, 255, 0.1),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-width: 120px;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, 
+      rgba(255, 255, 255, 0.2) 0%, 
+      transparent 100%);
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -2px;
+    width: 4px;
+    height: 80%;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      var(--glow-primary) 50%,
+      transparent 100%);
+    border-radius: 2px;
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+
+  &:hover {
+    border-color: var(--secondary-color);
+    box-shadow:
+      0 25px 80px var(--glow-secondary),
+      0 35px 100px rgba(0, 0, 0, 0.6),
+      inset 0 0 50px rgba(255, 255, 255, 0.2),
+      inset -8px -8px 20px rgba(0, 0, 0, 0.4);
+    transform: perspective(1000px) rotateX(-8deg) rotateY(5deg) translateZ(30px) scale(1.05);
+  }
+
+  .mobile & {
+    flex-direction: row;
+    width: 100%;
+    padding: 18px 25px;
+    gap: 15px;
+    transform: perspective(800px) rotateX(0deg) translateZ(0px);
+
+    &:hover {
+      transform: perspective(800px) rotateX(-3deg) translateZ(15px) scale(1.02);
+    }
+  }
+}
+
+.option-label {
+  color: var(--primary-color);
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  text-shadow: 0 0 10px var(--glow-primary);
+  letter-spacing: 1.5px;
+  text-align: center;
+
+  .mobile & {
+    font-size: 18px;
+    flex: 1;
+    text-align: left;
+  }
+}
+
+.option-pulse {
+  position: absolute;
+  inset: -8px;
+  border-radius: 20px;
+  border: 2px solid var(--secondary-color);
+  opacity: 0;
+  pointer-events: none;
+}
+
+// PARTÍCULAS DE EXPLOSIÓN
+.explosion-particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.explosion-particle {
+  position: absolute;
+  font-size: 20px;
+  animation: explode 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+// BOTÓN SALIR
+.exit-button {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  border: 2px solid var(--accent-color);
+  border-radius: 40px;
+  color: var(--accent-color);
+  font-size: 20px;
+  font-family: 'Cormorant Garamond', 'Georgia', serif;
+  font-weight: 600;
+  font-style: italic;
+  cursor: pointer;
+  box-shadow: 0 10px 40px var(--glow-secondary);
+  transition: all 0.3s;
+  z-index: 100;
+
+  &:hover,
+  &.hover {
+    transform: translateX(-50%) translateY(-8px) scale(1.05);
+    box-shadow: 0 20px 60px var(--glow-secondary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  @media (max-width: 768px) {
+    bottom: 20px;
+    padding: 15px 30px;
+    font-size: 18px;
+  }
+}
+
+.exit-icon {
+  font-size: 26px;
+  animation: doorSwing 2s ease-in-out infinite;
+}
+
+// ANIMACIONES
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 0.5;
+  }
+  25% {
+    transform: translate(30px, -40px) rotate(90deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(0, -80px) rotate(180deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-30px, -40px) rotate(270deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes orbitRotate {
+  0% {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(360deg);
+  }
+}
+
+@keyframes portalPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes sphere3D {
+  0% {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+  100% {
+    transform: rotateY(360deg) rotateX(10deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes energyPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes portalOrbit {
+  0% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg);
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px var(--glow-primary);
+  }
+  50% {
+    text-shadow: 0 0 40px var(--glow-primary), 0 0 60px var(--glow-secondary);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulseOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes explode {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform:
+      translate(calc(cos(var(--angle)) * 150px),
+        calc(sin(var(--angle)) * 150px)) scale(0.3) rotate(360deg);
+  }
+}
+
+@keyframes doorSwing {
+  0%, 100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(20deg);
+  }
+}
+
+@keyframes optionAppear {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%) 
+      rotate(var(--orbit-angle)) 
+      translateX(calc(var(--orbit-radius) / 2)) 
+      rotate(calc(-1 * var(--orbit-angle))) 
+      perspective(1000px)
+      rotateX(-90deg)
+      rotateY(45deg)
+      scale(0.3)
+      translateZ(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%) 
+      rotate(var(--orbit-angle)) 
+      translateX(var(--orbit-radius)) 
+      rotate(calc(-1 * var(--orbit-angle))) 
+      perspective(1000px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale(1)
+      translateZ(0px);
+  }
+}
+
+@keyframes mobileSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.option-icon-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px var(--glow-primary))
+          drop-shadow(0 8px 12px rgba(0, 0, 0, 0.6));
+  animation: iconBounce 2s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+
+  .option-content:hover & {
+    filter: drop-shadow(0 0 25px var(--glow-secondary))
+            drop-shadow(0 12px 20px rgba(0, 0, 0, 0.7));
+    transform: translateZ(20px) scale(1.15);
+  }
+
+  .mobile & {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.exit-icon-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px var(--glow-primary));
+  animation: doorSwing 2s ease-in-out infinite;
+}
