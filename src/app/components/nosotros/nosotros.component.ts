@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { HeaderWebComponent } from '../../common/header-web/header-web.component';
 
+// Importar AOS si está disponible, si no, comentar estas líneas
+declare var AOS: any;
 
 @Component({
   selector: 'app-nosotros',
@@ -10,7 +13,21 @@ import { HeaderWebComponent } from '../../common/header-web/header-web.component
   templateUrl: './nosotros.component.html',
   styleUrl: './nosotros.component.scss'
 })
-export class NosotrosComponent {
+export class NosotrosComponent implements OnInit {
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    // Inicializar animaciones AOS si está disponible
+    if (typeof AOS !== 'undefined') {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+      });
+    }
+  }
 
   valores = [
     {
@@ -83,4 +100,15 @@ export class NosotrosComponent {
       descripcion: 'Cofundador, ingeniero en sistemas con experiencia docente. Visión integral para implementar soluciones tecnológicas y educativas innovadoras.'
     }
   ];
+
+  getValorGradient(color: string): string {
+    return `linear-gradient(135deg, ${color}15, ${color}05)`;
+  }
+
+  contactar(): void {
+    // Aquí puedes navegar a una página de contacto o abrir un modal
+    this.router.navigate(['/contacto']);
+    // O si tienes un componente de contacto:
+    // this.dialog.open(ContactoComponent);
+  }
 }

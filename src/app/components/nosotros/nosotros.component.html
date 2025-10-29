@@ -6,27 +6,38 @@
     [rutaVolver]="'/'">
   </app-header-web>
 
-  <!-- Sobre la Institución -->
-  <section class="sobre-institucion">
+  <!-- Hero Section -->
+  <section class="hero-section">
     <div class="container">
-      <div class="content-grid">
-        <div class="text-content">
-          <h2>Educación de calidad en un entorno mágico</h2>
-          <p>
-            Somos una comunidad joven ubicada en la vereda de Fonquetá, Chía, donde la 
-            naturaleza y la educación se unen para crear un ambiente único de aprendizaje.
-          </p>
-          <p>
-            Nuestras instalaciones campestres ofrecen espacios verdes seguros y estimulantes, 
-            diseñados especialmente para niños desde los primeros meses hasta los 5 años de edad.
-          </p>
-          <p>
-            Contamos con sala cuna y aulas equipadas, atendidas por profesionales altamente 
-            capacitados y comprometidos con brindar educación de calidad a precios justos.
-          </p>
+      <div class="hero-content" data-aos="fade-up">
+        <h2 class="hero-title">Educación de calidad en un entorno mágico</h2>
+        <p class="hero-description">
+          Somos una comunidad joven ubicada en la vereda de Fonquetá, Chía, donde la 
+          naturaleza y la educación se unen para crear un ambiente único de aprendizaje.
+        </p>
+      </div>
+      
+      <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+        <div class="stat-card">
+          <div class="stat-icon">🌱</div>
+          <div class="stat-content">
+            <h3>Desde 5 meses</h3>
+            <p>Hasta 5 años</p>
+          </div>
         </div>
-        <div class="image-content">
-          <img src="assets/images/imagen_principal.jpg" alt="Liceo Lumen - Instalaciones">
+        <div class="stat-card">
+          <div class="stat-icon">🏡</div>
+          <div class="stat-content">
+            <h3>Ambiente campestre</h3>
+            <p>Espacios verdes seguros</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👨‍🏫</div>
+          <div class="stat-content">
+            <h3>Profesionales</h3>
+            <p>Altamente capacitados</p>
+          </div>
         </div>
       </div>
     </div>
@@ -35,13 +46,20 @@
   <!-- ¿Por qué elegir Liceo Lumen? -->
   <section class="caracteristicas">
     <div class="container">
-      <h2>¿Por qué elegir <span>Liceo Lumen?</span></h2>
+      <h2 class="section-title" data-aos="fade-up">
+        ¿Por qué elegir <span class="highlight">Liceo Lumen?</span>
+      </h2>
       
       <div class="caracteristicas-grid">
-        <div class="caracteristica-card" *ngFor="let carac of caracteristicas">
+        <div class="caracteristica-card" 
+             *ngFor="let carac of caracteristicas; let i = index"
+             [attr.data-aos]="'fade-up'"
+             [attr.data-aos-delay]="i * 100">
+          <div class="card-glow"></div>
           <div class="caracteristica-icon">{{ carac.icon }}</div>
           <h3>{{ carac.titulo }}</h3>
           <p>{{ carac.descripcion }}</p>
+          <div class="card-shine"></div>
         </div>
       </div>
     </div>
@@ -50,16 +68,24 @@
   <!-- Valores -->
   <section class="valores">
     <div class="container">
-      <h2>Nuestros <span>Valores</span></h2>
-      <p class="valores-intro">
+      <h2 class="section-title" data-aos="fade-up">
+        Nuestros <span class="highlight">Valores</span>
+      </h2>
+      <p class="valores-intro" data-aos="fade-up" data-aos-delay="100">
         Cada valor es una luz que guía nuestro camino y forma el carácter de nuestros estudiantes
       </p>
       
       <div class="valores-grid">
-        <div class="valor-card" *ngFor="let valor of valores">
-          <div class="valor-icon">{{ valor.icon }}</div>
-          <h3 [style.color]="valor.color">{{ valor.titulo }}</h3>
-          <p>{{ valor.descripcion }}</p>
+        <div class="valor-card" 
+             *ngFor="let valor of valores; let i = index"
+             [attr.data-aos]="'zoom-in'"
+             [attr.data-aos-delay]="i * 150">
+          <div class="valor-background" [style.background]="getValorGradient(valor.color)"></div>
+          <div class="valor-content">
+            <div class="valor-icon">{{ valor.icon }}</div>
+            <h3 [style.color]="valor.color">{{ valor.titulo }}</h3>
+            <p>{{ valor.descripcion }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -68,16 +94,40 @@
   <!-- Equipo Fundador -->
   <section class="equipo">
     <div class="container">
-      <h2>Nuestro <span>Equipo Fundador</span></h2>
+      <h2 class="section-title" data-aos="fade-up">
+        Nuestro <span class="highlight">Equipo Fundador</span>
+      </h2>
       
       <div class="equipo-grid">
-        <div class="team-card" *ngFor="let miembro of equipo">
-          <div class="team-emoji">{{ miembro.emoji }}</div>
-          <div class="team-info">
-            <h3>{{ miembro.nombre }}</h3>
-            <p>{{ miembro.descripcion }}</p>
+        <div class="team-card" 
+             *ngFor="let miembro of equipo; let i = index"
+             [attr.data-aos]="'flip-left'"
+             [attr.data-aos-delay]="i * 150">
+          <div class="team-card-inner">
+            <div class="team-front">
+              <div class="team-emoji">{{ miembro.emoji }}</div>
+              <h3>{{ miembro.nombre }}</h3>
+              <div class="team-badge">Cofundador</div>
+            </div>
+            <div class="team-back">
+              <p>{{ miembro.descripcion }}</p>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content" data-aos="zoom-in">
+        <h2>¿Listo para ser parte de nuestra familia?</h2>
+        <p>Agenda una visita y conoce nuestras instalaciones</p>
+        <button class="cta-button" (click)="contactar()">
+          <span>Contáctanos</span>
+          <span class="button-icon">→</span>
+        </button>
       </div>
     </div>
   </section>
