@@ -1,9 +1,9 @@
 .portal-message {
   --msg-color: #ffbd31;
   position: fixed;
-  top: 50%;
+  top: -200px; // Empieza fuera de la pantalla (arriba)
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   max-width: 450px;
   width: 90%;
   padding: 25px;
@@ -13,7 +13,14 @@
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(255, 189, 49, 0.7);
   z-index: 1000;
-  animation: slideUp 0.8s ease-out;
+  
+  // Animación de entrada: baja desde arriba y SE CENTRA
+  animation: slideDownFromTop 1.5s ease-out forwards;
+
+  // Animación de salida cuando tiene la clase .saliendo
+  &.saliendo {
+    animation: slideDownAndFade 1s ease-in forwards;
+  }
 
   &[data-theme="christmas"] {
     --msg-color: #e0f4ff;
@@ -145,8 +152,8 @@
 // Responsive
 @media (max-width: 768px) {
   .portal-message {
-    top: 50%;  
-    transform: translate(-50%, -50%); //
+    top: -200px; // También empieza fuera en móvil
+    transform: translateX(-50%);
     padding: 20px;
     max-width: 95%;
   }
@@ -157,5 +164,101 @@
 
   .message-icon {
     font-size: 32px;
+  }
+}
+// ========================================
+// ANIMACIONES CINEMATOGRÁFICAS
+// ========================================
+
+// Animación de ENTRADA: Baja desde arriba y SE CENTRA
+@keyframes slideDownFromTop {
+  0% {
+    top: -200px;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+  }
+  60% {
+    top: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1.05);
+  }
+  100% {
+    top: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+}
+
+// Animación de SALIDA: Sigue bajando y desaparece (desde el CENTRO)
+@keyframes slideDownAndFade {
+  0% {
+    top: 50%;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+  50% {
+    top: 70%;
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(-50%) scale(0.95);
+  }
+  100% {
+    top: 120%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%) scale(0.7);
+  }
+}
+
+// Actualizar responsive para nueva posición CENTRADA
+@media (max-width: 768px) {
+  @keyframes slideDownFromTop {
+    0% {
+      top: -200px;
+      opacity: 0;
+    }
+    60% {
+      top: 50%;
+      opacity: 1;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    100% {
+      top: 50%;
+      opacity: 1;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+
+  @keyframes slideDownAndFade {
+    0% {
+      top: 50%;
+      opacity: 1;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    100% {
+      top: 120%;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}
+
+// Animación especial para estado "cargando"
+.portal-message[data-tipo="cargando"] {
+  .message-icon {
+    animation: pulseIcon 1s ease-in-out infinite;
+  }
+  
+  .message-text {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulseIcon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
   }
 }

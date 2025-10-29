@@ -16,7 +16,7 @@ export class PortalMessageComponent implements OnInit {
     mostrar = false;
 
     private readonly STORAGE_KEY_PREFIX = 'ultimo_mensaje_portal_';
-    private readonly MINUTOS_ESPERA = 30;
+    private readonly MINUTOS_ESPERA = 0;
 
     constructor(
         private portalService: PortalMensajesService,
