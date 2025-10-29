@@ -63,14 +63,15 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
         // Cargar catálogos
         this.cargarCatalogos();
 
-        // Iniciar timer para mostrar modal después de 5 segundos
-        this.timerModal = setTimeout(() => {
-            this.abrirModal();
-        }, 5000);
+        // LIMPIAR sessionStorage al cargar el componente
+        // Esto permite que el modal aparezca una vez por sesión
+        const modalYaMostrado = sessionStorage.getItem('modal_contacto_mostrado');
 
-        // Verificar si ya se mostró el modal en esta sesión
-        if (localStorage.getItem('modal_contacto_mostrado')) {
-            clearTimeout(this.timerModal);
+        if (!modalYaMostrado) {
+            // Iniciar timer para mostrar modal después de 5 segundos
+            this.timerModal = setTimeout(() => {
+                this.abrirModal();
+            }, 5000);
         }
     }
 
@@ -129,8 +130,8 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
         this.mostrarModal = false;
         document.body.style.overflow = 'auto';
 
-        // Marcar que ya se mostró en esta sesión
-        localStorage.setItem('modal_contacto_mostrado', 'true');
+        // Marcar que ya se mostró en esta SESIÓN (no persistirá al cerrar el navegador)
+        sessionStorage.setItem('modal_contacto_mostrado', 'true');
     }
 
     /**
