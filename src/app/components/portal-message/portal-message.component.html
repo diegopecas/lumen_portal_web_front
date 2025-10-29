@@ -1,0 +1,13 @@
+<div class="portal-message" 
+     [attr.data-theme]="currentTheme.name" 
+     *ngIf="mensaje && mostrar">
+  <div class="message-glow"></div>
+  <div class="message-content">
+    <button class="close-btn" (click)="cerrar()">✕</button>
+    <div class="message-icon">{{ getIconoPorTipo() }}</div>
+    <p class="message-text">{{ mensaje.mensaje }}</p>
+    <div class="message-footer">
+      <span class="message-type">{{ getTipoTexto() }}</span>
+    </div>
+  </div>
+</div>

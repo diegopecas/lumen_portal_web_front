@@ -949,3 +949,34 @@
   filter: drop-shadow(0 0 8px var(--glow-primary));
   animation: doorSwing 2s ease-in-out infinite;
 }
+// ========================================
+// ESTILOS PARA MENSAJE DEL PORTAL
+// ========================================
+
+app-portal-message {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 90%;
+  max-width: 500px;
+  
+  @media (max-width: 768px) {
+    top: 70%;
+    max-width: 85%;
+  }
+  
+  animation: messageSlideUp 0.6s ease-out;
+}
+
+@keyframes messageSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

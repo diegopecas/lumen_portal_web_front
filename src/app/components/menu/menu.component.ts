@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListene
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeConfig } from '../../services/theme.service';
+import { PortalMessageComponent } from '../portal-message/portal-message.component';
 
 interface Star {
   top: number;
@@ -42,7 +43,7 @@ interface ExplosionParticle {
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',
   standalone: true,
-  imports: [CommonModule, RouterModule]
+  imports: [CommonModule, RouterModule, PortalMessageComponent]
 })
 export class MenuComponent implements AfterViewInit, OnDestroy {
 
