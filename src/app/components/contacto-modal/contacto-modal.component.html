@@ -1,0 +1,207 @@
+<!-- Botón flotante para abrir modal manualmente -->
+<button class="btn-flotante-contacto" (click)="abrirModalManual()" *ngIf="!mostrarModal">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+  <span>Agenda tu visita</span>
+</button>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+  <div class="modal-container" 
+     [class.modal-container-calendly]="mostrandoCalendly"
+     (click)="$event.stopPropagation()">
+    
+    <!-- Botón cerrar -->
+    <button class="btn-cerrar" (click)="cerrarModal()" aria-label="Cerrar">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    
+    <!-- LOADING -->
+    <div class="loading-overlay" *ngIf="mostrandoCargando">
+      <div class="spinner"></div>
+      <p>Enviando tu solicitud...</p>
+    </div>
+    
+    <!-- FORMULARIO -->
+    <div class="modal-content" *ngIf="mostrandoFormulario && !mostrandoCargando">
+      <div class="modal-header">
+        <h2>¡Agenda tu visita! 🌟</h2>
+        <p>Conoce nuestras instalaciones y programas educativos</p>
+      </div>
+      
+      <!-- Errores -->
+      <div class="alert alert-error" *ngIf="mostrarErrores && errores.length > 0">
+        <ul>
+          <li *ngFor="let error of errores">{{ error }}</li>
+        </ul>
+      </div>
+      
+      <form class="contacto-form" (ngSubmit)="enviarFormulario()">
+        
+        <!-- Nombre -->
+        <div class="form-group">
+          <label for="nombre_padre">Nombre completo *</label>
+          <input 
+            type="text" 
+            id="nombre_padre" 
+            name="nombre_padre"
+            [(ngModel)]="formulario.nombre_padre"
+            placeholder="Tu nombre completo"
+            required
+            maxlength="255">
+        </div>
+        
+        <!-- Email y Teléfono -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Correo electrónico *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email"
+              [(ngModel)]="formulario.email"
+              placeholder="tu@email.com"
+              required>
+          </div>
+          
+          <div class="form-group">
+            <label for="telefono">Teléfono *</label>
+            <input 
+              type="tel" 
+              id="telefono" 
+              name="telefono"
+              [(ngModel)]="formulario.telefono"
+              placeholder="3001234567"
+              required
+              maxlength="50">
+          </div>
+        </div>
+        
+        <!-- Programa de interés y Edad -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="programa">Programa de interés</label>
+            <select 
+              id="programa" 
+              name="programa"
+              [(ngModel)]="formulario.id_programa_interes">
+              <option [value]="undefined">Selecciona un programa</option>
+              <option *ngFor="let programa of catalogos.programas_interes" [value]="programa.id">
+                {{ programa.nombre }}
+              </option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edad">Edad del niño (años)</label>
+            <input 
+              type="number" 
+              id="edad" 
+              name="edad"
+              [(ngModel)]="formulario.edad_nino"
+              placeholder="3"
+              min="0"
+              max="15">
+          </div>
+        </div>
+        
+        <!-- Tipo de consulta -->
+        <div class="form-group">
+          <label for="tipo_consulta">Tipo de consulta *</label>
+          <select 
+            id="tipo_consulta" 
+            name="tipo_consulta"
+            [(ngModel)]="formulario.id_tipo_consulta"
+            required>
+            <option [value]="0">Selecciona una opción</option>
+            <option *ngFor="let tipo of catalogos.tipos_consulta" [value]="tipo.id">
+              {{ tipo.nombre }}
+            </option>
+          </select>
+        </div>
+        
+        <!-- Cómo nos conoció -->
+        <div class="form-group">
+          <label for="como_conocio">¿Cómo nos conociste? *</label>
+          <select 
+            id="como_conocio" 
+            name="como_conocio"
+            [(ngModel)]="formulario.id_como_conocio"
+            (change)="onComoConocioChange()"
+            required>
+            <option [value]="0">Selecciona una opción</option>
+            <option *ngFor="let tipo of catalogos.tipos_como_conocio" [value]="tipo.id">
+              {{ tipo.nombre }}
+            </option>
+          </select>
+        </div>
+        
+        <!-- Campo detalle condicional -->
+        <div class="form-group" *ngIf="mostrarComoConocioDetalle">
+          <label for="como_conocio_detalle">Cuéntanos más</label>
+          <input 
+            type="text" 
+            id="como_conocio_detalle" 
+            name="como_conocio_detalle"
+            [(ngModel)]="formulario.como_conocio_detalle"
+            [placeholder]="placeholderComoConocioDetalle"
+            maxlength="255">
+        </div>
+        
+        <!-- Mensaje -->
+        <div class="form-group">
+          <label for="mensaje">Mensaje *</label>
+          <textarea 
+            id="mensaje" 
+            name="mensaje"
+            [(ngModel)]="formulario.mensaje"
+            placeholder="Cuéntanos qué te interesa conocer sobre Lumen..."
+            rows="4"
+            required
+            minlength="10"></textarea>
+        </div>
+        
+        <!-- Honeypot (campo oculto anti-spam) -->
+        <input 
+          type="text" 
+          name="honeypot" 
+          [(ngModel)]="formulario.honeypot"
+          style="display: none;"
+          tabindex="-1"
+          autocomplete="off">
+        
+        <!-- Botones -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" (click)="cerrarModal()">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Agendar Visita
+          </button>
+        </div>
+        
+      </form>
+    </div>
+    
+    <!-- CALENDLY -->
+    <div class="modal-content calendly-content" *ngIf="mostrandoCalendly">
+      <div class="modal-header">
+        <h2>Selecciona fecha y hora 📅</h2>
+        <p>Elige el momento que mejor te convenga para visitarnos</p>
+      </div>
+      
+      <div id="calendly-container" class="calendly-widget"></div>
+      
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="volverAlFormulario()">
+          Volver
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</div>
