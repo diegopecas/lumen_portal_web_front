@@ -1,6 +1,8 @@
 <!-- Botón flotante para abrir modal manualmente -->
-<button class="btn-flotante-contacto" (click)="abrirModalManual()" *ngIf="!mostrarModal" [attr.data-theme]="currentTheme.name">
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<button class="btn-flotante-contacto" (click)="abrirModalManual()" *ngIf="!mostrarModal"
+  [attr.data-theme]="currentTheme.name">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2">
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
   </svg>
   <span>Agenda tu visita</span>
@@ -63,34 +65,54 @@
           </div>
         </div>
 
-        <!-- Programa de interés y Edad -->
-        <div class="form-row">
+        <!-- Programa de interés (full width con select personalizado) -->
+        <div class="form-group">
+          <label for="programa">Programa de interés</label>
+          <div class="custom-select-wrapper" [class.open]="programaSelectOpen">
+            <div class="custom-select-trigger" (click)="toggleProgramaSelect()">
+              <span *ngIf="!formulario.id_programa_interes" class="placeholder">Selecciona un programa</span>
+              <span *ngIf="formulario.id_programa_interes" class="selected-value">
+                {{ getProgramaNombre(formulario.id_programa_interes) }}
+              </span>
+              <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="custom-select-dropdown" *ngIf="programaSelectOpen">
+              <div class="custom-select-option" (click)="selectPrograma(undefined)">
+                <span class="option-text placeholder">Selecciona un programa</span>
+              </div>
+              <div class="custom-select-option" *ngFor="let programa of catalogos.programas_interes"
+                [class.selected]="formulario.id_programa_interes === programa.id" (click)="selectPrograma(programa.id)">
+                <div class="option-content">
+                  <span class="option-nombre">{{ programa.nombre }}</span>
+                  <span class="option-descripcion">{{ programa.descripcion }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Input oculto para validación -->
+          <input type="hidden" name="programa" [(ngModel)]="formulario.id_programa_interes">
+        </div>
+
+        <!-- Tipo de consulta y Edad (70% - 30%) -->
+        <div class="form-row form-row-uneven">
           <div class="form-group">
-            <label for="programa">Programa de interés</label>
-            <select id="programa" name="programa" [(ngModel)]="formulario.id_programa_interes">
-              <option [value]="undefined">Selecciona un programa</option>
-              <option *ngFor="let programa of catalogos.programas_interes" [value]="programa.id">
-                {{ programa.nombre }}
+            <label for="tipo_consulta">Tipo de consulta *</label>
+            <select id="tipo_consulta" name="tipo_consulta" [(ngModel)]="formulario.id_tipo_consulta" required>
+              <option [value]="0">Selecciona una opción</option>
+              <option *ngFor="let tipo of catalogos.tipos_consulta" [value]="tipo.id">
+                {{ tipo.nombre }}
               </option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="edad">Edad del niño (años)</label>
+          <div class="form-group form-group-small">
+            <label for="edad">Edad del niño</label>
             <input type="number" id="edad" name="edad" [(ngModel)]="formulario.edad_nino" placeholder="3" min="0"
               max="15">
           </div>
-        </div>
-
-        <!-- Tipo de consulta -->
-        <div class="form-group">
-          <label for="tipo_consulta">Tipo de consulta *</label>
-          <select id="tipo_consulta" name="tipo_consulta" [(ngModel)]="formulario.id_tipo_consulta" required>
-            <option [value]="0">Selecciona una opción</option>
-            <option *ngFor="let tipo of catalogos.tipos_consulta" [value]="tipo.id">
-              {{ tipo.nombre }}
-            </option>
-          </select>
         </div>
 
         <!-- Cómo nos conoció -->

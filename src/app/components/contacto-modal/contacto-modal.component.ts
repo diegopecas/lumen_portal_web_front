@@ -62,6 +62,8 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
     // URL de Calendly
     private calendlyUrl = '';
 
+    public programaSelectOpen = false;
+
     constructor(
         private contactoService: ContactoService,
         private themeService: ThemeService
@@ -356,5 +358,27 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
     volverAlFormulario(): void {
         this.mostrandoCalendly = false;
         this.mostrandoFormulario = true;
+    }
+    toggleProgramaSelect(): void {
+        this.programaSelectOpen = !this.programaSelectOpen;
+    }
+
+    selectPrograma(id: number | undefined): void {
+        this.formulario.id_programa_interes = id;
+        this.programaSelectOpen = false;
+    }
+
+    getProgramaNombre(id: number): string {
+        const programa = this.catalogos.programas_interes.find(p => p.id === id);
+        return programa ? programa.nombre : '';
+    }
+
+    // Agregar un HostListener para cerrar el select al hacer click fuera
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent): void {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.custom-select-wrapper')) {
+            this.programaSelectOpen = false;
+        }
     }
 }
