@@ -1,95 +1,42 @@
-// ============================================
-// VARIABLES
-// ============================================
-$primary-color: #8B4513;
-$primary-hover: #A0522D;
-$secondary-color: #6c757d;
-$success-color: #28a745;
-$danger-color: #dc3545;
-$light-bg: #f8f9fa;
-$dark-text: #212529;
-$border-color: #dee2e6;
-$shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+// Variables base
+$modal-bg: rgba(0, 0, 0, 0.85);
+$container-bg: #ffffff;
+$text-color: #333;
+$border-radius: 16px;
 $transition: all 0.3s ease;
 
-// ============================================
-// BOTÓN FLOTANTE
-// ============================================
-.btn-flotante-contacto {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: linear-gradient(135deg, $primary-color, $primary-hover);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 15px 25px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
-  transition: $transition;
-  z-index: 998;
-  animation: pulse 2s infinite;
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(139, 69, 19, 0.5);
-    animation: none;
-  }
-
-  @media (max-width: 768px) {
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 20px;
-    font-size: 14px;
-
-    span {
-      display: none;
-    }
-
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-// ============================================
-// MODAL OVERLAY
-// ============================================
+// Modal overlay
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+  background: $modal-bg;
+  backdrop-filter: blur(8px);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 999;
-  padding: 20px;
+  align-items: center;
+  z-index: 9999;
   animation: fadeIn 0.3s ease;
+  padding: 20px;
+
+  // Temas dinámicos para overlay
+  &[data-theme="halloween"] {
+    background: rgba(26, 10, 46, 0.9);
+  }
+
+  &[data-theme="christmas"] {
+    background: rgba(10, 20, 40, 0.9);
+  }
+
+  &[data-theme="valentine"] {
+    background: rgba(45, 10, 30, 0.9);
+  }
+
+  &[data-theme="new-year"] {
+    background: rgba(10, 5, 32, 0.9);
+  }
 }
 
 @keyframes fadeIn {
@@ -101,23 +48,43 @@ $transition: all 0.3s ease;
   }
 }
 
-// ============================================
-// MODAL CONTAINER
-// ============================================
+// Container del modal
 .modal-container {
-  position: relative;
-  background: white;
-  border-radius: 20px;
-  box-shadow: $shadow;
-  width: 100%;
+  background: $container-bg;
+  border-radius: $border-radius;
   max-width: 600px;
+  width: 100%;
   max-height: 90vh;
   overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.4s ease;
 
+  &.modal-container-calendly {
+    max-width: 900px;
+    max-height: 85vh;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      max-height: 90vh;
+    }
+
+    .modal-content {
+      padding: 30px 20px;
+      max-height: calc(85vh - 40px);
+      overflow-y: auto;
+
+      @media (max-width: 768px) {
+        padding: 20px 15px;
+        max-height: calc(90vh - 40px);
+      }
+    }
+  }
+
   @media (max-width: 768px) {
-    max-width: 95%;
-    border-radius: 15px;
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
   }
 }
 
@@ -132,58 +99,56 @@ $transition: all 0.3s ease;
   }
 }
 
-// ============================================
-// BOTÓN CERRAR
-// ============================================
+// Botón cerrar
 .btn-cerrar {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.1);
   border: none;
-  cursor: pointer;
-  padding: 8px;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   transition: $transition;
   z-index: 10;
-  color: #999;
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    stroke: $text-color;
   }
 
   &:hover {
-    background: $light-bg;
-    color: $dark-text;
+    background: rgba(0, 0, 0, 0.2);
     transform: rotate(90deg);
   }
 }
 
-// ============================================
-// LOADING OVERLAY
-// ============================================
+// Loading overlay
 .loading-overlay {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 40px;
-  gap: 20px;
+  padding: 60px 20px;
 
   .spinner {
     width: 50px;
     height: 50px;
-    border: 4px solid $light-bg;
-    border-top-color: $primary-color;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #6366f1;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
 
   p {
-    color: $secondary-color;
+    margin-top: 20px;
+    color: #666;
     font-size: 16px;
-    margin: 0;
   }
 }
 
@@ -193,24 +158,16 @@ $transition: all 0.3s ease;
   }
 }
 
-// ============================================
-// MODAL CONTENT
-// ============================================
+// Contenido del modal
 .modal-content {
-  padding: 40px;
+  padding: 40px 30px;
 
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
 }
 
-.calendly-content {
-  padding: 30px 20px;
-}
-
-// ============================================
-// MODAL HEADER
-// ============================================
+// Header del modal
 .modal-header {
   text-align: center;
   margin-bottom: 30px;
@@ -218,8 +175,15 @@ $transition: all 0.3s ease;
   h2 {
     font-size: 28px;
     font-weight: 700;
-    color: $primary-color;
     margin: 0 0 10px 0;
+    color: $text-color;
+
+    &.themed-title {
+      background: linear-gradient(135deg, var(--theme-primary, #6366f1), var(--theme-secondary, #8b5cf6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     @media (max-width: 768px) {
       font-size: 24px;
@@ -228,8 +192,13 @@ $transition: all 0.3s ease;
 
   p {
     font-size: 16px;
-    color: $secondary-color;
+    color: #666;
     margin: 0;
+
+    &.themed-subtitle {
+      color: var(--theme-primary, #6366f1);
+      font-weight: 500;
+    }
 
     @media (max-width: 768px) {
       font-size: 14px;
@@ -237,211 +206,306 @@ $transition: all 0.3s ease;
   }
 }
 
-// ============================================
-// ALERTAS
-// ============================================
+// Alertas de error
 .alert {
-  padding: 15px 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 8px;
   margin-bottom: 20px;
-  font-size: 14px;
 
-  ul {
-    margin: 0;
-    padding-left: 20px;
-  }
+  &.alert-error {
+    background: #fee;
+    border: 1px solid #fcc;
 
-  li {
-    margin: 5px 0;
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #c33;
+
+      li {
+        margin: 5px 0;
+      }
+    }
   }
 }
 
-.alert-error {
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-}
-
-// ============================================
-// FORMULARIO
-// ============================================
+// Formulario
 .contacto-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  .form-group {
+    margin-bottom: 20px;
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  label {
-    font-size: 14px;
-    font-weight: 600;
-    color: $dark-text;
-  }
-
-  input,
-  select,
-  textarea {
-    padding: 12px 15px;
-    border: 2px solid $border-color;
-    border-radius: 10px;
-    font-size: 15px;
-    font-family: inherit;
-    transition: $transition;
-    background: white;
-
-    &:focus {
-      outline: none;
-      border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: $text-color;
+      margin-bottom: 8px;
     }
 
-    &::placeholder {
-      color: #adb5bd;
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: $transition;
+      background: #fff;
+
+      &:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
     }
   }
 
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 
-  select {
-    cursor: pointer;
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
   }
 }
 
-// ============================================
-// BOTONES
-// ============================================
+// Botones
 .form-actions {
   display: flex;
   gap: 15px;
-  margin-top: 10px;
+  margin-top: 30px;
 
   @media (max-width: 768px) {
     flex-direction: column;
   }
-}
 
-.btn {
-  padding: 14px 30px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: $transition;
-  flex: 1;
+  .btn {
+    flex: 1;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    text-align: center;
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-}
+    &.btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
 
-.btn-primary {
-  background: linear-gradient(135deg, $primary-color, $primary-hover);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+      &.themed-btn-primary {
+        background: linear-gradient(135deg, var(--theme-primary, #6366f1), var(--theme-secondary, #8b5cf6));
+      }
 
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
-  }
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      }
+    }
 
-  &:active:not(:disabled) {
-    transform: translateY(0);
-  }
-}
+    &.btn-secondary {
+      background: #f3f4f6;
+      color: $text-color;
 
-.btn-secondary {
-  background: white;
-  color: $secondary-color;
-  border: 2px solid $border-color;
+      &.themed-btn-secondary {
+        background: rgba(var(--theme-primary-rgb, 99, 102, 241), 0.1);
+        color: var(--theme-primary, #6366f1);
+      }
 
-  &:hover:not(:disabled) {
-    background: $light-bg;
-    border-color: $secondary-color;
-  }
-}
+      &:hover {
+        background: #e5e7eb;
+      }
+    }
 
-// ============================================
-// CALENDLY WIDGET
-// ============================================
-.calendly-widget {
-  min-height: 700px;
-  height: 700px;
-  border-radius: 15px;
-  overflow: hidden;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    min-height: 600px;
-    height: 600px;
-  }
-}
-
-// ============================================
-// SCROLLBAR PERSONALIZADO
-// ============================================
-.modal-container {
-  position: relative;
-  background: white;
-  border-radius: 20px;
-  box-shadow: $shadow;
-  width: 100%;
-  max-width: 600px;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideUp 0.4s ease;
-
-  // Cuando muestra Calendly, hacerlo más grande
-  &:has(.calendly-content) {
-    max-width: 900px;
-    max-height: 95vh;
-  }
-
-  @media (max-width: 768px) {
-    max-width: 95%;
-    border-radius: 15px;
-  }
-}
-
-// ============================================
-// ANIMACIONES ADICIONALES
-// ============================================
-.form-group {
-  animation: fadeInUp 0.5s ease forwards;
-  opacity: 0;
-
-  @for $i from 1 through 10 {
-    &:nth-child(#{$i}) {
-      animation-delay: #{$i * 0.05}s;
+    &:active {
+      transform: scale(0.98);
     }
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+// Botón flotante
+.btn-flotante-contacto {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--theme-primary, #6366f1), var(--theme-secondary, #8b5cf6));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(var(--theme-primary-rgb, 99, 102, 241), 0.4);
+  transition: $transition;
+  z-index: 9998;
+
+  svg {
+    width: 24px;
+    height: 24px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(var(--theme-primary-rgb, 99, 102, 241), 0.5);
   }
+
+  @media (max-width: 768px) {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    font-size: 14px;
+
+    span {
+      display: none;
+    }
+  }
+}
+
+// Calendly
+.calendly-content {
+  padding: 30px 20px !important;
+
+  .modal-header {
+    margin-bottom: 20px;
+  }
+
+  .calendly-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+
+  #calendly-container {
+    min-height: 600px;
+    height: 600px;
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f9fafb;
+
+    @media (max-width: 768px) {
+      min-height: 500px;
+      height: 500px;
+    }
+  }
+
+  // Asegurar que el iframe de Calendly ocupe todo el espacio
+  .calendly-inline-widget,
+  .calendly-inline-widget iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 600px !important;
+    border: none !important;
+    border-radius: 12px;
+
+    @media (max-width: 768px) {
+      min-height: 500px !important;
+    }
+  }
+
+  .form-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+// Variables CSS para temas dinámicos
+:root {
+  --theme-primary: #6366f1;
+  --theme-secondary: #8b5cf6;
+  --theme-primary-rgb: 99, 102, 241;
+}
+
+[data-theme="halloween"] {
+  --theme-primary: #ff8c00;
+  --theme-secondary: #8a2be2;
+  --theme-primary-rgb: 255, 140, 0;
+}
+
+[data-theme="christmas"] {
+  --theme-primary: #4dd0ff;
+  --theme-secondary: #e0f4ff;
+  --theme-primary-rgb: 77, 208, 255;
+}
+
+[data-theme="valentine"] {
+  --theme-primary: #ff1493;
+  --theme-secondary: #ff69b4;
+  --theme-primary-rgb: 255, 20, 147;
+}
+
+[data-theme="new-year"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #ff1493;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="spring"] {
+  --theme-primary: #32cd32;
+  --theme-secondary: #ff69b4;
+  --theme-primary-rgb: 50, 205, 50;
+}
+
+[data-theme="easter"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #ff69b4;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="mothers-day"] {
+  --theme-primary: #ff69b4;
+  --theme-secondary: #dda0dd;
+  --theme-primary-rgb: 255, 105, 180;
+}
+
+[data-theme="summer"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #00bfff;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="colombia-day"] {
+  --theme-primary: #fcd116;
+  --theme-secondary: #ce1126;
+  --theme-primary-rgb: 252, 209, 22;
+}
+
+[data-theme="kites"] {
+  --theme-primary: #00bfff;
+  --theme-secondary: #ffd700;
+  --theme-primary-rgb: 0, 191, 255;
+}
+
+[data-theme="love-friendship"] {
+  --theme-primary: #ff1493;
+  --theme-secondary: #ffd700;
+  --theme-primary-rgb: 255, 20, 147;
+}
+
+[data-theme="thanksgiving"] {
+  --theme-primary: #ff8c00;
+  --theme-secondary: #ffd700;
+  --theme-primary-rgb: 255, 140, 0;
 }

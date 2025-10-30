@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactoService, Catalogos, ContactoFormData, Catalogo } from '../../services/contacto.service';
+import { ThemeService, ThemeConfig } from '../../services/theme.service';
 
 declare const Calendly: any;
 
@@ -24,6 +25,10 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
     public mostrandoCalendly = false;
     public mostrandoConfirmacion = false;
     public mostrandoCargando = false;
+
+    // Tema actual
+    public currentTheme!: ThemeConfig;
+    public mensajeEspecial: string = '';
 
     // Catálogos
     public catalogos: Catalogos = {
@@ -57,14 +62,20 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
     // URL de Calendly
     private calendlyUrl = '';
 
-    constructor(private contactoService: ContactoService) { }
+    constructor(
+        private contactoService: ContactoService,
+        private themeService: ThemeService
+    ) { }
 
     ngOnInit(): void {
+        // Cargar tema actual
+        this.currentTheme = this.themeService.getCurrentTheme();
+        this.mensajeEspecial = this.obtenerMensajeEspecial();
+
         // Cargar catálogos
         this.cargarCatalogos();
 
         // LIMPIAR sessionStorage al cargar el componente
-        // Esto permite que el modal aparezca una vez por sesión
         const modalYaMostrado = sessionStorage.getItem('modal_contacto_mostrado');
 
         if (!modalYaMostrado) {
@@ -84,6 +95,28 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
     @HostListener('document:keydown.escape', ['$event'])
     onEscapeKey(event: KeyboardEvent): void {
         this.cerrarModal();
+    }
+
+    /**
+     * Obtener mensaje especial según el mes
+     */
+    private obtenerMensajeEspecial(): string {
+        const mensajes: { [key: string]: string } = {
+            'new-year': '¡Comienza el año con nosotros! Descubre un espacio donde tus hijos brillarán ✨',
+            'valentine': 'Con amor construimos el futuro de tus pequeños 💕',
+            'spring': 'Como las flores, aquí tus hijos florecerán con alegría 🌸',
+            'easter': 'Un nuevo comienzo lleno de aprendizaje y diversión 🐰',
+            'mothers-day': 'Para las mamás que quieren lo mejor para sus hijos 💐',
+            'summer': 'Descubre nuestro mundo de aventuras y aprendizaje ☀️',
+            'colombia-day': '¡Con orgullo colombiano educamos el futuro! 🇨🇴',
+            'kites': 'Elevamos los sueños de tus hijos cada día 🪁',
+            'love-friendship': 'Donde se cultiva el amor, la amistad y el conocimiento 💖',
+            'halloween': 'Un lugar mágico donde tus hijos vivirán aventuras encantadas 🎃',
+            'thanksgiving': 'Agradecidos por formar parte de tu familia 🍂',
+            'christmas': '¡La magia de la navidad en cada rincón de Lumen! ❄️🎄'
+        };
+
+        return mensajes[this.currentTheme.name] || 'Conoce nuestras instalaciones y programas educativos';
     }
 
     /**
@@ -130,7 +163,7 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
         this.mostrarModal = false;
         document.body.style.overflow = 'auto';
 
-        // Marcar que ya se mostró en esta SESIÓN (no persistirá al cerrar el navegador)
+        // Marcar que ya se mostró en esta SESIÓN
         sessionStorage.setItem('modal_contacto_mostrado', 'true');
     }
 
@@ -229,16 +262,13 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
                 if (response.success) {
                     console.log('Contacto creado exitosamente:', response);
 
-                    // Guardar URL de Calendly
                     if (response.calendly_url) {
                         this.calendlyUrl = response.calendly_url;
                     }
 
-                    // Ocultar formulario y mostrar Calendly
                     this.mostrandoFormulario = false;
                     this.mostrandoCalendly = true;
 
-                    // Cargar widget de Calendly
                     setTimeout(() => {
                         this.cargarCalendly();
                     }, 300);
@@ -266,7 +296,6 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
             return;
         }
 
-        // Cargar script de Calendly si no está cargado
         if (!document.getElementById('calendly-script')) {
             const script = document.createElement('script');
             script.id = 'calendly-script';
@@ -286,15 +315,12 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
      */
     inicializarCalendly(): void {
         if (typeof Calendly !== 'undefined') {
-            // Construir mensaje útil para el equipo - MENSAJE PRIMERO
             let mensajePreparacion = '';
 
-            // 1. Mensaje del usuario (lo más importante)
             if (this.formulario.mensaje) {
                 mensajePreparacion = this.formulario.mensaje;
             }
 
-            // 2. Datos adicionales
             mensajePreparacion += `\n\n--- Información adicional ---`;
             mensajePreparacion += `\nTeléfono: ${this.formulario.telefono}`;
 
