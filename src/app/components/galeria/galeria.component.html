@@ -1,0 +1,89 @@
+<div class="galeria-container" [attr.data-theme]="currentTheme.name">
+  <!-- Header -->
+  <app-header-web 
+    [titulo]="'Galería'" 
+    [breadcrumbs]="['Inicio', 'Galería']"
+    [rutaVolver]="'/'">
+  </app-header-web>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up">
+        <h2 class="hero-title themed-title">Momentos que inspiran</h2>
+        <p class="hero-description">
+          Descubre los momentos más especiales de nuestra comunidad educativa
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería Masonry -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="masonry-grid">
+        <div 
+          *ngFor="let image of displayedImages; let i = index"
+          class="gallery-item themed-gallery-item"
+          [attr.data-aos]="'fade-up'"
+          [attr.data-aos-delay]="(i % (isMobile ? 12 : 18)) * 50"
+          (click)="openLightbox(image)">
+          
+          <div class="image-wrapper" [class.loaded]="image.loaded">
+            <img 
+              [src]="image.url" 
+              [alt]="image.alt"
+              (load)="onImageLoad(image)"
+              loading="lazy">
+            <div class="image-overlay themed-overlay">
+              <div class="overlay-content">
+                <span class="view-icon">🔍</span>
+                <span class="view-text">Ver imagen</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div class="loading-more" *ngIf="isLoading">
+        <div class="spinner themed-spinner"></div>
+        <p>Cargando más imágenes...</p>
+      </div>
+
+      <!-- End Message -->
+      <div class="end-message" *ngIf="currentIndex >= allImages.length && !isLoading">
+        <p>✨ Has visto todas nuestras fotos ✨</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" *ngIf="selectedImage" (click)="closeLightbox()">
+    <div class="lightbox-overlay"></div>
+    
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <button class="lightbox-close themed-button" (click)="closeLightbox()">
+        ✕
+      </button>
+
+      <button 
+        class="lightbox-nav lightbox-prev themed-button" 
+        (click)="previousImage()"
+        *ngIf="displayedImages.indexOf(selectedImage) > 0">
+        ‹
+      </button>
+
+      <div class="lightbox-image-container">
+        <img [src]="selectedImage.url" [alt]="selectedImage.alt">
+      </div>
+
+      <button 
+        class="lightbox-nav lightbox-next themed-button" 
+        (click)="nextImage()"
+        *ngIf="displayedImages.indexOf(selectedImage) < displayedImages.length - 1">
+        ›
+      </button>
+    </div>
+  </div>
+</div>

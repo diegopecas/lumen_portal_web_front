@@ -179,7 +179,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
       // Desktop: distribuir en círculo PERFECTO empezando desde arriba
       const radius = 320;
       const startAngle = -90; // Empezar desde arriba (12 en punto)
-      
+
       this.menuOptions = options.map((opt, i) => ({
         ...opt,
         angle: startAngle + (360 / options.length) * i,
@@ -199,7 +199,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     canvas.height = window.innerHeight;
 
     const numParticles = this.isMobile ? 20 : 35;
-    
+
     const getThemeColor = () => {
       if (this.currentTheme.name === 'halloween') return '139, 0, 139';
       if (this.currentTheme.name === 'christmas') return '0, 100, 200';
@@ -276,13 +276,13 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
         // Conectar con las opciones adyacentes
         this.menuOptions.forEach((option2, j) => {
           if (i >= j) return; // Evitar duplicados
-          
+
           const angle2 = (option2.angle * Math.PI) / 180;
           const x2 = centerX + Math.cos(angle2) * option2.radius;
           const y2 = centerY + Math.sin(angle2) * option2.radius;
 
           const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-          
+
           // Solo conectar opciones cercanas
           if (distance < 400) {
             const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
@@ -293,7 +293,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
             ctx.strokeStyle = gradient;
             ctx.lineWidth = 2;
             ctx.setLineDash([5, 10]);
-            
+
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
@@ -327,7 +327,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
       // Enviar evento a Google Analytics
       this.analyticsService.trackPortalHover();
       this.portalHoverTracked = true;
-      
+
       // Resetear después de 5 segundos para permitir re-tracking
       setTimeout(() => {
         this.portalHoverTracked = false;
@@ -348,7 +348,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
    */
   selectOption(path: string, index: number): void {
     const option = this.menuOptions[index];
-    
+
     // 📊 Enviar evento a Google Analytics ANTES de navegar
     this.analyticsService.trackMenuOptionClick(option.label, path);
 

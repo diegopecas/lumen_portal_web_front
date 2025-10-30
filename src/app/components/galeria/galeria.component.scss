@@ -1,0 +1,646 @@
+// ========================================
+// Variables y Mixins
+// ========================================
+$transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+// ========================================
+// Container Principal
+// ========================================
+.galeria-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+// ========================================
+// Hero Section
+// ========================================
+.hero-section {
+    padding: 80px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+        &.themed-title[data-theme="halloween"] {
+            color: #ff8c00;
+        }
+
+        &.themed-title[data-theme="christmas"] {
+            color: #4dd0ff;
+        }
+
+        &.themed-title[data-theme="valentine"] {
+            color: #ff1493;
+        }
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        line-height: 1.8;
+    }
+}
+
+// ========================================
+// Gallery Section
+// ========================================
+.gallery-section {
+    padding: 60px 0 100px;
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+}
+
+// ========================================
+// Masonry Grid
+// ========================================
+.masonry-grid {
+    column-count: 3;
+    column-gap: 20px;
+
+    @media (max-width: 1024px) {
+        column-count: 2;
+    }
+
+    @media (max-width: 768px) {
+        column-count: 1;
+        column-gap: 15px;
+    }
+}
+
+// ========================================
+// Masonry Grid
+// ========================================
+.masonry-grid {
+    column-count: 3;
+    column-gap: 20px;
+
+    @media (max-width: 1024px) {
+        column-count: 2;
+    }
+
+    @media (max-width: 768px) {
+        column-count: 1;
+        column-gap: 15px;
+    }
+}
+
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    cursor: pointer;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+
+    @media (max-width: 768px) {
+        margin-bottom: 15px;
+    }
+
+    .image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        transition: $transition-smooth;
+        background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+
+        // Efecto de brillo que cruza la imagen
+        &::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            z-index: 3;
+        }
+
+        // Overlay de color temático
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg,
+                    rgba(255, 193, 7, 0.3) 0%,
+                    rgba(255, 152, 0, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+            opacity: 0;
+            filter: grayscale(0%) brightness(100%);
+        }
+
+        &.loaded img {
+            opacity: 1;
+            animation: imageLoad 0.5s ease forwards;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center,
+                    rgba(0, 0, 0, 0.5) 0%,
+                    rgba(0, 0, 0, 0.8) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+
+            .overlay-content {
+                text-align: center;
+                color: white;
+                transform: translateY(20px) scale(0.8);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+                .view-icon {
+                    font-size: 3rem;
+                    display: block;
+                    margin-bottom: 10px;
+                    animation: pulse 2s ease-in-out infinite;
+                }
+
+                .view-text {
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+    }
+
+    // Efectos al hacer hover
+    &:hover .image-wrapper {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+        // Activar el brillo que cruza
+        &::after {
+            top: 100%;
+            left: 100%;
+        }
+
+        &::before {
+            opacity: 1;
+        }
+
+        img {
+            transform: scale(1.15) rotate(2deg);
+            filter: grayscale(0%) brightness(110%) contrast(110%);
+        }
+
+        .image-overlay {
+            opacity: 1;
+
+            .overlay-content {
+                transform: translateY(0) scale(1);
+            }
+        }
+    }
+}
+
+// ========================================
+// Themed Gallery Items con efectos específicos
+// ========================================
+.themed-gallery-item {
+
+    // Halloween - Naranja y Morado
+    &[data-theme="halloween"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 140, 0, 0.5) 0%,
+                    rgba(138, 43, 226, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(255, 140, 0, 0.4);
+        }
+    }
+
+    // Navidad - Azul helado
+    &[data-theme="christmas"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(77, 208, 255, 0.5) 0%,
+                    rgba(224, 244, 255, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(77, 208, 255, 0.4);
+        }
+
+        &::after {
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 255, 255, 0.9) 50%,
+                    transparent 70%);
+        }
+    }
+
+    // San Valentín - Rosa
+    &[data-theme="valentine"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 20, 147, 0.5) 0%,
+                    rgba(255, 105, 180, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(255, 20, 147, 0.4);
+        }
+    }
+
+    // Primavera - Verde y Rosa
+    &[data-theme="spring"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(50, 205, 50, 0.5) 0%,
+                    rgba(255, 105, 180, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(50, 205, 50, 0.4);
+        }
+    }
+
+    // Verano - Amarillo y Azul
+    &[data-theme="summer"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 215, 0, 0.5) 0%,
+                    rgba(0, 191, 255, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.4);
+        }
+    }
+
+    // Colombia - Amarillo, Azul, Rojo
+    &[data-theme="colombia-day"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(252, 209, 22, 0.5) 0%,
+                    rgba(0, 56, 147, 0.5) 50%,
+                    rgba(206, 17, 38, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(252, 209, 22, 0.4);
+        }
+    }
+
+    // Año Nuevo - Dorado
+    &[data-theme="new-year"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 215, 0, 0.6) 0%,
+                    rgba(255, 20, 147, 0.4) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
+        }
+
+        &::after {
+            background: linear-gradient(45deg,
+                    transparent 30%,
+                    rgba(255, 215, 0, 0.8) 50%,
+                    transparent 70%);
+        }
+    }
+
+    // Cometas - Azul cielo
+    &[data-theme="kites"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(0, 191, 255, 0.5) 0%,
+                    rgba(255, 105, 180, 0.5) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(0, 191, 255, 0.4);
+        }
+    }
+
+    // Amor y Amistad - Rosa intenso
+    &[data-theme="love-friendship"] .image-wrapper {
+        &:hover::before {
+            background: linear-gradient(135deg,
+                    rgba(255, 20, 147, 0.6) 0%,
+                    rgba(255, 105, 180, 0.4) 100%);
+        }
+
+        &:hover {
+            box-shadow: 0 20px 50px rgba(255, 20, 147, 0.5);
+        }
+    }
+}
+
+// ========================================
+// Animación de pulso para el ícono
+// ========================================
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+// ========================================
+// Animación de carga de imagen mejorada
+// ========================================
+@keyframes imageLoad {
+    0% {
+        opacity: 0;
+        filter: blur(20px) brightness(120%);
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0) brightness(100%);
+        transform: scale(1);
+    }
+}
+
+// ========================================
+// Themed Gallery Items
+// ========================================
+.themed-gallery-item {
+    &[data-theme="halloween"] .image-wrapper:hover::before {
+        background: linear-gradient(135deg, rgba(255, 140, 0, 0.4) 0%, rgba(138, 43, 226, 0.4) 100%);
+    }
+
+    &[data-theme="christmas"] .image-wrapper:hover::before {
+        background: linear-gradient(135deg, rgba(77, 208, 255, 0.4) 0%, rgba(224, 244, 255, 0.4) 100%);
+    }
+
+    &[data-theme="valentine"] .image-wrapper:hover::before {
+        background: linear-gradient(135deg, rgba(255, 20, 147, 0.4) 0%, rgba(255, 105, 180, 0.4) 100%);
+    }
+
+    &[data-theme="spring"] .image-wrapper:hover::before {
+        background: linear-gradient(135deg, rgba(50, 205, 50, 0.4) 0%, rgba(255, 105, 180, 0.4) 100%);
+    }
+}
+
+// ========================================
+// Loading & End Messages
+// ========================================
+.loading-more,
+.end-message {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #ff8c00;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+
+    &.themed-spinner[data-theme="halloween"] {
+        border-top-color: #ff8c00;
+    }
+
+    &.themed-spinner[data-theme="christmas"] {
+        border-top-color: #4dd0ff;
+    }
+
+    &.themed-spinner[data-theme="valentine"] {
+        border-top-color: #ff1493;
+    }
+}
+
+// ========================================
+// Lightbox
+// ========================================
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+
+    .lightbox-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        z-index: 1;
+        animation: scaleIn 0.3s ease;
+    }
+
+    .lightbox-image-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: $transition-smooth;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+    }
+
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+    }
+
+    .lightbox-prev {
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+// ========================================
+// Animations
+// ========================================
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes imageLoad {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0 40px;
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+        }
+    }
+
+    .lightbox {
+
+        .lightbox-close,
+        .lightbox-nav {
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+        }
+
+        .lightbox-close {
+            top: 10px;
+            right: 10px;
+        }
+
+        .lightbox-prev {
+            left: 10px;
+        }
+
+        .lightbox-next {
+            right: 10px;
+        }
+    }
+}
