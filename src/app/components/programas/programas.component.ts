@@ -106,8 +106,8 @@ export class ProgramasComponent implements OnInit {
         'Disponible también los sábados'
       ],
       icono: '🎁',
-      colorFondo: 'linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 100%)',
-      colorTexto: '#DB7093'
+      colorFondo: 'linear-gradient(135deg, #DDA0DD 0%, #E6B8E6 100%)',
+      colorTexto: '#8B008B'
     }
   ];
 
@@ -115,7 +115,7 @@ export class ProgramasComponent implements OnInit {
     private router: Router,
     private themeService: ThemeService,
     private analyticsService: AnalyticsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.currentTheme = this.themeService.getCurrentTheme();

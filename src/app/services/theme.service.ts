@@ -179,7 +179,7 @@ export class ThemeService {
 
   getCurrentTheme(): ThemeConfig {
     //const currentMonth = new Date().getMonth() + 1;
-    const currentMonth = 12;
+    const currentMonth = 11;
     return this.themes.find(t => t.month === currentMonth) || this.themes[9]; // Default Halloween
   }
 
