@@ -95,17 +95,17 @@ export class NosotrosComponent implements OnInit {
   equipo = [
     {
       nombre: 'Santiago',
-      emoji: '👨‍💼',
+      foto: 'assets/images/equipo/santiago.jpg',
       descripcion: 'Cofundador lleno de energía y visión emprendedora. Líder natural apasionado por la tecnología y la innovación educativa.'
     },
     {
       nombre: 'María del Pilar',
-      emoji: '👩‍💼',
+      foto: 'assets/images/equipo/maria.jpg',
       descripcion: 'Cofundadora, ingeniera en sistemas con maestría. Amplia experiencia en gestión de equipos y compromiso con la educación de calidad.'
     },
     {
       nombre: 'Diego',
-      emoji: '👨‍🏫',
+      foto: 'assets/images/equipo/diego.jpg',
       descripcion: 'Cofundador, ingeniero en sistemas con experiencia docente. Visión integral para implementar soluciones tecnológicas y educativas innovadoras.'
     }
   ];

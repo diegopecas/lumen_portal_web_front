@@ -364,89 +364,232 @@
   }
 }
 
-// Equipo
+// ========================================
+// Equipo Fundador
+// ========================================
 .equipo {
-  padding: 100px 20px;
-  background: var(--white);
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 
   .equipo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
     margin-top: 60px;
   }
 
   .team-card {
     perspective: 1000px;
-    height: 400px;
+    height: 420px;
     cursor: pointer;
-
-    .team-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
 
     &:hover .team-card-inner {
       transform: rotateY(180deg);
     }
+  }
 
-    .team-front,
-    .team-back {
-      position: absolute;
+  .team-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+  }
+
+  .team-front,
+  .team-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .team-front {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+
+    .team-photo-container {
+      position: relative;
       width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
+      height: 280px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.3) 100%);
+        z-index: 1;
+        transition: opacity 0.4s ease;
+      }
+
+      .team-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.5s ease;
+        filter: grayscale(0%);
+      }
+
+      .photo-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg,
+            rgba(255, 193, 7, 0.2) 0%,
+            rgba(255, 152, 0, 0.2) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 2;
+      }
+
+      &:hover {
+        .team-photo {
+          transform: scale(1.08);
+        }
+
+        .photo-overlay {
+          opacity: 1;
+        }
+
+        &::before {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .team-back {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+
+    p {
+      color: white;
+      font-size: 1rem;
+      line-height: 1.8;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  // Themed styles
+  .themed-team-card {
+    &[data-theme="enero"] .team-back {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    &[data-theme="febrero"] .team-back {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    &[data-theme="marzo"] .team-back {
+      background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+    }
+
+    &[data-theme="abril"] .team-back {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    &[data-theme="mayo"] .team-back {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    }
+
+    &[data-theme="junio"] .team-back {
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    }
+
+    &[data-theme="julio"] .team-back {
+      background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);
+    }
+
+    &[data-theme="agosto"] .team-back {
+      background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    }
+
+    &[data-theme="septiembre"] .team-back {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    &[data-theme="octubre"] .team-back {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    &[data-theme="noviembre"] .team-back {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    &[data-theme="diciembre"] .team-back {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+  }
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+  .equipo {
+    padding: 60px 0;
+
+    .equipo-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-card {
+      height: 380px;
     }
 
     .team-front {
-      background: linear-gradient(135deg, var(--gray-light), var(--white));
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      padding: 20px;
 
-      .team-emoji {
-        font-size: 100px;
-        margin-bottom: 20px;
-        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
-        animation: bounce 2s infinite;
+      .team-photo-container {
+        height: 240px;
+        margin-bottom: 15px;
       }
 
       h3 {
-        font-size: 2rem;
-        color: var(--black);
-        margin-bottom: 15px;
-        font-weight: 700;
-      }
-
-      .team-badge {
-        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-        color: white;
-        padding: 8px 20px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 5px 15px rgba(255, 189, 49, 0.4);
+        font-size: 1.3rem;
       }
     }
 
     .team-back {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: white;
-      transform: rotateY(180deg);
-      box-shadow: 0 10px 40px rgba(255, 189, 49, 0.4);
+      padding: 30px;
 
       p {
-        text-align: center;
-        line-height: 1.8;
-        font-size: 1.1rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        font-size: 0.95rem;
       }
     }
   }
