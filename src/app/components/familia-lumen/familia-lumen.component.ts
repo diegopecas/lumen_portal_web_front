@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderWebComponent } from '../../common/header-web/header-web.component';
 import { ThemeService, ThemeConfig } from '../../services/theme.service';
@@ -64,6 +64,10 @@ export class FamiliaLumenComponent implements OnInit {
     ubicacion: {
       direccion: '',
       mapsUrl: ''
+    },
+    redesSociales: {
+      instagram: '',
+      facebook: ''
     }
   };
 
@@ -149,7 +153,7 @@ export class FamiliaLumenComponent implements OnInit {
 
   getTotalDocumentos(): number {
     return this.categoriasFiltradas.reduce(
-      (total, categoria) => total + categoria.documentos.length, 
+      (total, categoria) => total + categoria.documentos.length,
       0
     );
   }

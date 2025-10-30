@@ -29,6 +29,10 @@ export interface ContactoInfo {
     direccion: string;
     mapsUrl: string;
   };
+  redesSociales: {
+    instagram: string;
+    facebook: string;
+  };
 }
 
 export interface ContactoResponse {
@@ -42,7 +46,7 @@ export interface ContactoResponse {
 export class ConfiguracionService {
   private apiUrl = environment.apiUrl + '/configuraciones';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Obtener configuraciones públicas del portal
@@ -86,6 +90,10 @@ export class ConfiguracionService {
             ubicacion: {
               direccion: '',
               mapsUrl: ''
+            },
+            redesSociales: {
+              instagram: '',
+              facebook: ''
             }
           }
         });

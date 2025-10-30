@@ -1,0 +1,351 @@
+<div class="contacto-container" [attr.data-theme]="currentTheme.name">
+  
+  <!-- Header -->
+  <app-header-web 
+    [titulo]="'Contáctanos'" 
+    [breadcrumbs]="['Inicio', 'Contacto']" 
+    [rutaVolver]="'/'">
+  </app-header-web>
+
+  <!-- Partículas flotantes temáticas -->
+  <div class="floating-particles">
+    <div *ngFor="let particle of floatingParticles" 
+         class="theme-particle" 
+         [style.left.%]="particle.x"
+         [style.top.%]="particle.y" 
+         [style.animation-delay.s]="particle.delay"
+         [style.animation-duration.s]="particle.duration">
+      {{ particle.icon }}
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <section class="contacto-main-section">
+    <div class="container">
+      
+      <!-- Layout 2 columnas -->
+      <div class="contacto-layout">
+
+        <!-- COLUMNA IZQUIERDA: FORMULARIO -->
+        <div class="formulario-column" data-aos="fade-right">
+
+          <!-- Mensaje de éxito -->
+          <div class="mensaje-exito themed-mensaje-exito" *ngIf="mostrandoExito && !mostrandoCalendly" data-aos="zoom-in">
+            <div class="exito-icon">✅</div>
+            <h3>¡Mensaje enviado con éxito!</h3>
+            <p>Hemos recibido tu solicitud. ¿Quieres agendar tu visita ahora?</p>
+            <div class="exito-actions">
+              <button class="btn-agendar themed-btn-primary" (click)="abrirCalendly()">
+                📅 Agendar Visita Ahora
+              </button>
+              <button class="btn-mas-tarde themed-btn-secondary" (click)="agendarMasTarde()">
+                Agendar más tarde
+              </button>
+            </div>
+          </div>
+
+          <!-- Widget de Calendly -->
+          <div class="calendly-section" *ngIf="mostrandoCalendly" data-aos="fade-up">
+            <h3 class="calendly-title">Selecciona fecha y hora 📅</h3>
+            <p class="calendly-subtitle">Elige el momento que mejor te convenga</p>
+            <div id="calendly-container" class="calendly-widget"></div>
+            <button class="btn-volver themed-btn-secondary" (click)="agendarMasTarde()">
+              ← Volver
+            </button>
+          </div>
+
+          <!-- Formulario -->
+          <div class="formulario-wrapper" *ngIf="!mostrandoExito">
+            <div class="form-header">
+              <h2 class="themed-title">¡Agenda tu visita!</h2>
+              <p class="themed-subtitle">Completa el formulario y nos pondremos en contacto contigo</p>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading-overlay" *ngIf="mostrandoCargando">
+              <div class="spinner"></div>
+              <p>Enviando tu solicitud...</p>
+            </div>
+
+            <!-- Errores -->
+            <div class="alert alert-error" *ngIf="mostrarErrores && errores.length > 0" data-aos="shake">
+              <div class="alert-icon">⚠️</div>
+              <ul>
+                <li *ngFor="let error of errores">{{ error }}</li>
+              </ul>
+            </div>
+
+            <!-- Formulario -->
+            <form class="contacto-form" (ngSubmit)="enviarFormulario()" [class.disabled]="mostrandoCargando">
+
+              <!-- Nombre -->
+              <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+                <label for="nombre_padre">Nombre completo *</label>
+                <input 
+                  type="text" 
+                  id="nombre_padre" 
+                  name="nombre_padre" 
+                  [(ngModel)]="formulario.nombre_padre"
+                  placeholder="Tu nombre completo" 
+                  required 
+                  maxlength="255"
+                  [disabled]="mostrandoCargando">
+              </div>
+
+              <!-- Email y Teléfono -->
+              <div class="form-row" data-aos="fade-up" data-aos-delay="150">
+                <div class="form-group">
+                  <label for="email">Correo electrónico *</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    [(ngModel)]="formulario.email" 
+                    placeholder="tu@email.com"
+                    required
+                    [disabled]="mostrandoCargando">
+                </div>
+
+                <div class="form-group">
+                  <label for="telefono">Teléfono *</label>
+                  <input 
+                    type="tel" 
+                    id="telefono" 
+                    name="telefono" 
+                    [(ngModel)]="formulario.telefono" 
+                    placeholder="3001234567"
+                    required 
+                    maxlength="50"
+                    [disabled]="mostrandoCargando">
+                </div>
+              </div>
+
+              <!-- Programa de interés -->
+              <div class="form-group" data-aos="fade-up" data-aos-delay="200">
+                <label for="programa">Programa de interés</label>
+                <div class="custom-select-wrapper" [class.open]="programaSelectOpen">
+                  <div class="custom-select-trigger" (click)="toggleProgramaSelect()" [class.disabled]="mostrandoCargando">
+                    <span *ngIf="!formulario.id_programa_interes" class="placeholder">Selecciona un programa</span>
+                    <span *ngIf="formulario.id_programa_interes" class="selected-value">
+                      {{ getProgramaNombre(formulario.id_programa_interes) }}
+                    </span>
+                    <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                      fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </div>
+                  <div class="custom-select-dropdown" *ngIf="programaSelectOpen">
+                    <div class="custom-select-option" (click)="selectPrograma(undefined)">
+                      <span class="option-text placeholder">Selecciona un programa</span>
+                    </div>
+                    <div class="custom-select-option" 
+                         *ngFor="let programa of catalogos.programas_interes"
+                         [class.selected]="formulario.id_programa_interes === programa.id" 
+                         (click)="selectPrograma(programa.id)">
+                      <div class="option-content">
+                        <span class="option-nombre">{{ programa.nombre }}</span>
+                        <span class="option-descripcion">{{ programa.descripcion }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="programa" [(ngModel)]="formulario.id_programa_interes">
+              </div>
+
+              <!-- Tipo de consulta y Edad -->
+              <div class="form-row form-row-uneven" data-aos="fade-up" data-aos-delay="250">
+                <div class="form-group">
+                  <label for="tipo_consulta">Tipo de consulta *</label>
+                  <select 
+                    id="tipo_consulta" 
+                    name="tipo_consulta" 
+                    [(ngModel)]="formulario.id_tipo_consulta" 
+                    required
+                    [disabled]="mostrandoCargando">
+                    <option [value]="0">Selecciona una opción</option>
+                    <option *ngFor="let tipo of catalogos.tipos_consulta" [value]="tipo.id">
+                      {{ tipo.nombre }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group form-group-small">
+                  <label for="edad">Edad del niño</label>
+                  <input 
+                    type="number" 
+                    id="edad" 
+                    name="edad" 
+                    [(ngModel)]="formulario.edad_nino" 
+                    placeholder="3" 
+                    min="0"
+                    max="15"
+                    [disabled]="mostrandoCargando">
+                </div>
+              </div>
+
+              <!-- Cómo nos conoció -->
+              <div class="form-group" data-aos="fade-up" data-aos-delay="300">
+                <label for="como_conocio">¿Cómo nos conociste? *</label>
+                <select 
+                  id="como_conocio" 
+                  name="como_conocio" 
+                  [(ngModel)]="formulario.id_como_conocio"
+                  (change)="onComoConocioChange()" 
+                  required
+                  [disabled]="mostrandoCargando">
+                  <option [value]="0">Selecciona una opción</option>
+                  <option *ngFor="let tipo of catalogos.tipos_como_conocio" [value]="tipo.id">
+                    {{ tipo.nombre }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Campo detalle condicional -->
+              <div class="form-group" *ngIf="mostrarComoConocioDetalle" data-aos="fade-up" data-aos-delay="350">
+                <label for="como_conocio_detalle">Cuéntanos más</label>
+                <input 
+                  type="text" 
+                  id="como_conocio_detalle" 
+                  name="como_conocio_detalle"
+                  [(ngModel)]="formulario.como_conocio_detalle" 
+                  [placeholder]="placeholderComoConocioDetalle" 
+                  maxlength="255"
+                  [disabled]="mostrandoCargando">
+              </div>
+
+              <!-- Mensaje -->
+              <div class="form-group" data-aos="fade-up" data-aos-delay="400">
+                <label for="mensaje">Mensaje *</label>
+                <textarea 
+                  id="mensaje" 
+                  name="mensaje" 
+                  [(ngModel)]="formulario.mensaje"
+                  placeholder="Cuéntanos qué te interesa conocer sobre Lumen..." 
+                  rows="4" 
+                  required 
+                  minlength="10"
+                  [disabled]="mostrandoCargando"></textarea>
+              </div>
+
+              <!-- Honeypot -->
+              <input 
+                type="text" 
+                name="honeypot" 
+                [(ngModel)]="formulario.honeypot" 
+                style="display: none;" 
+                tabindex="-1"
+                autocomplete="off">
+
+              <!-- Botón enviar -->
+              <div class="form-actions" data-aos="fade-up" data-aos-delay="450">
+                <button 
+                  type="submit" 
+                  class="btn btn-primary themed-btn-primary"
+                  [disabled]="mostrandoCargando">
+                  <span *ngIf="!mostrandoCargando">Enviar Solicitud</span>
+                  <span *ngIf="mostrandoCargando">Enviando...</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: INFORMACIÓN DE CONTACTO -->
+        <div class="info-column" data-aos="fade-left">
+
+          <!-- Tarjeta de información -->
+          <div class="info-card themed-info-card">
+            <h3 class="info-title">Información de Contacto</h3>
+
+            <!-- Correos -->
+            <div class="info-section">
+              <div class="info-icon">📧</div>
+              <div class="info-content">
+                <h4>Correos Electrónicos</h4>
+                <a *ngFor="let correo of contactInfo.correos" 
+                   [href]="'mailto:' + correo" 
+                   class="info-link"
+                   (click)="sendEmail(correo)">
+                  {{ correo }}
+                </a>
+              </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="info-section">
+              <div class="info-icon">📱</div>
+              <div class="info-content">
+                <h4>Teléfono</h4>
+                <p class="info-text" (click)="llamarTelefono()" style="cursor: pointer;">
+                  {{ contactInfo.telefono }}
+                </p>
+              </div>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="info-section">
+              <div class="info-icon">💬</div>
+              <div class="info-content">
+                <h4>WhatsApp</h4>
+                <button class="whatsapp-btn themed-whatsapp-btn" (click)="sendWhatsApp()">
+                  <span class="whatsapp-icon">📲</span>
+                  <span>Escribir por WhatsApp</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Horarios -->
+            <div class="info-section">
+              <div class="info-icon">🕐</div>
+              <div class="info-content">
+                <h4>Horarios de Atención</h4>
+                <p class="info-text"><strong>Lunes a Viernes:</strong> {{ contactInfo.horarios.lunesViernes }}</p>
+                <p class="info-text"><strong>Extendido:</strong> {{ contactInfo.horarios.extendido }}</p>
+                <p class="info-text"><strong>Sábados:</strong> {{ contactInfo.horarios.sabados }}</p>
+              </div>
+            </div>
+
+            <!-- Ubicación -->
+            <div class="info-section">
+              <div class="info-icon">📍</div>
+              <div class="info-content">
+                <h4>Ubicación</h4>
+                <p class="info-text">{{ contactInfo.ubicacion.direccion }}</p>
+                <button class="maps-btn themed-maps-btn" (click)="openMaps()">
+                  <span class="maps-icon">🗺️</span>
+                  <span>Ver en Google Maps</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="info-section">
+              <div class="info-icon">🌐</div>
+              <div class="info-content">
+                <h4>Síguenos</h4>
+                <div class="redes-sociales">
+                  <button class="social-btn instagram-btn" (click)="openInstagram()" *ngIf="contactInfo.redesSociales.instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span>Instagram</span>
+                  </button>
+                  <button class="social-btn facebook-btn" (click)="openFacebook()" *ngIf="contactInfo.redesSociales.facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    <span>Facebook</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
