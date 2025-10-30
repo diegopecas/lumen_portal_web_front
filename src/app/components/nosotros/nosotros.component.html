@@ -1,4 +1,4 @@
-<div class="nosotros-container">
+<div class="nosotros-container" [attr.data-theme]="currentTheme.name">
   <!-- Header -->
   <app-header-web 
     [titulo]="'Sobre Nosotros'" 
@@ -10,7 +10,7 @@
   <section class="hero-section">
     <div class="container">
       <div class="hero-content" data-aos="fade-up">
-        <h2 class="hero-title">Educación de calidad en un entorno mágico</h2>
+        <h2 class="hero-title themed-title">Educación de calidad en un entorno mágico</h2>
         <p class="hero-description">
           Somos una comunidad joven ubicada en la vereda de Fonquetá, Chía, donde la 
           naturaleza y la educación se unen para crear un ambiente único de aprendizaje.
@@ -18,21 +18,21 @@
       </div>
       
       <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
-        <div class="stat-card">
+        <div class="stat-card themed-card">
           <div class="stat-icon">🌱</div>
           <div class="stat-content">
             <h3>Desde 5 meses</h3>
             <p>Hasta 5 años</p>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card themed-card">
           <div class="stat-icon">🏡</div>
           <div class="stat-content">
             <h3>Ambiente campestre</h3>
             <p>Espacios verdes seguros</p>
           </div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card themed-card">
           <div class="stat-icon">👨‍🏫</div>
           <div class="stat-content">
             <h3>Profesionales</h3>
@@ -46,16 +46,16 @@
   <!-- ¿Por qué elegir Liceo Lumen? -->
   <section class="caracteristicas">
     <div class="container">
-      <h2 class="section-title" data-aos="fade-up">
+      <h2 class="section-title themed-section-title" data-aos="fade-up">
         ¿Por qué elegir <span class="highlight">Liceo Lumen?</span>
       </h2>
       
       <div class="caracteristicas-grid">
-        <div class="caracteristica-card" 
+        <div class="caracteristica-card themed-caracteristica-card" 
              *ngFor="let carac of caracteristicas; let i = index"
              [attr.data-aos]="'fade-up'"
              [attr.data-aos-delay]="i * 100">
-          <div class="card-glow"></div>
+          <div class="card-glow themed-glow"></div>
           <div class="caracteristica-icon">{{ carac.icon }}</div>
           <h3>{{ carac.titulo }}</h3>
           <p>{{ carac.descripcion }}</p>
@@ -68,7 +68,7 @@
   <!-- Valores -->
   <section class="valores">
     <div class="container">
-      <h2 class="section-title" data-aos="fade-up">
+      <h2 class="section-title themed-section-title" data-aos="fade-up">
         Nuestros <span class="highlight">Valores</span>
       </h2>
       <p class="valores-intro" data-aos="fade-up" data-aos-delay="100">
@@ -76,7 +76,7 @@
       </p>
       
       <div class="valores-grid">
-        <div class="valor-card" 
+        <div class="valor-card themed-valor-card" 
              *ngFor="let valor of valores; let i = index"
              [attr.data-aos]="'zoom-in'"
              [attr.data-aos-delay]="i * 150">
@@ -94,12 +94,12 @@
   <!-- Equipo Fundador -->
   <section class="equipo">
     <div class="container">
-      <h2 class="section-title" data-aos="fade-up">
+      <h2 class="section-title themed-section-title" data-aos="fade-up">
         Nuestro <span class="highlight">Equipo Fundador</span>
       </h2>
       
       <div class="equipo-grid">
-        <div class="team-card" 
+        <div class="team-card themed-team-card" 
              *ngFor="let miembro of equipo; let i = index"
              [attr.data-aos]="'flip-left'"
              [attr.data-aos-delay]="i * 150">
@@ -107,7 +107,7 @@
             <div class="team-front">
               <div class="team-emoji">{{ miembro.emoji }}</div>
               <h3>{{ miembro.nombre }}</h3>
-              <div class="team-badge">Cofundador</div>
+              <div class="team-badge themed-badge">Cofundador</div>
             </div>
             <div class="team-back">
               <p>{{ miembro.descripcion }}</p>
@@ -118,17 +118,5 @@
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta-content" data-aos="zoom-in">
-        <h2>¿Listo para ser parte de nuestra familia?</h2>
-        <p>Agenda una visita y conoce nuestras instalaciones</p>
-        <button class="cta-button" (click)="contactar()">
-          <span>Contáctanos</span>
-          <span class="button-icon">→</span>
-        </button>
-      </div>
-    </div>
-  </section>
+
 </div>

@@ -606,3 +606,179 @@
     font-size: 1rem !important;
   }
 }
+// ========================================
+// ESTILOS TEMÁTICOS
+// ========================================
+
+// Variables CSS para temas
+:root {
+  --theme-primary: #6366f1;
+  --theme-secondary: #8b5cf6;
+  --theme-accent: #ec4899;
+  --theme-primary-rgb: 99, 102, 241;
+}
+
+[data-theme="halloween"] {
+  --theme-primary: #ff8c00;
+  --theme-secondary: #8a2be2;
+  --theme-accent: #dda0dd;
+  --theme-primary-rgb: 255, 140, 0;
+}
+
+[data-theme="christmas"] {
+  --theme-primary: #4dd0ff;
+  --theme-secondary: #e0f4ff;
+  --theme-accent: #ffffff;
+  --theme-primary-rgb: 77, 208, 255;
+}
+
+[data-theme="valentine"] {
+  --theme-primary: #ff1493;
+  --theme-secondary: #ff69b4;
+  --theme-accent: #ffb6c1;
+  --theme-primary-rgb: 255, 20, 147;
+}
+
+[data-theme="new-year"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #ff1493;
+  --theme-accent: #00ffff;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="spring"] {
+  --theme-primary: #32cd32;
+  --theme-secondary: #ff69b4;
+  --theme-accent: #ffff00;
+  --theme-primary-rgb: 50, 205, 50;
+}
+
+[data-theme="easter"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #ff69b4;
+  --theme-accent: #87ceeb;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="mothers-day"] {
+  --theme-primary: #ff69b4;
+  --theme-secondary: #dda0dd;
+  --theme-accent: #fff;
+  --theme-primary-rgb: 255, 105, 180;
+}
+
+[data-theme="summer"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #ff8c00;
+  --theme-accent: #00bfff;
+  --theme-primary-rgb: 255, 215, 0;
+}
+
+[data-theme="colombia-day"] {
+  --theme-primary: #fcd116;
+  --theme-secondary: #003893;
+  --theme-accent: #ce1126;
+  --theme-primary-rgb: 252, 209, 22;
+}
+
+[data-theme="kites"] {
+  --theme-primary: #00bfff;
+  --theme-secondary: #ff69b4;
+  --theme-accent: #ffd700;
+  --theme-primary-rgb: 0, 191, 255;
+}
+
+[data-theme="love-friendship"] {
+  --theme-primary: #ff1493;
+  --theme-secondary: #ff69b4;
+  --theme-accent: #ffd700;
+  --theme-primary-rgb: 255, 20, 147;
+}
+
+[data-theme="thanksgiving"] {
+  --theme-primary: #ff8c00;
+  --theme-secondary: #8b4513;
+  --theme-accent: #ffd700;
+  --theme-primary-rgb: 255, 140, 0;
+}
+
+// Aplicar tema a título hero
+.themed-title {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Aplicar tema a títulos de sección
+.themed-section-title {
+  .highlight {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Aplicar tema a tarjetas de estadísticas
+.themed-card {
+  border: 2px solid rgba(var(--theme-primary-rgb), 0.2);
+  
+  &:hover {
+    border-color: var(--theme-primary);
+    box-shadow: 0 10px 30px rgba(var(--theme-primary-rgb), 0.3);
+  }
+
+  .stat-icon {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  }
+}
+
+// Aplicar tema a tarjetas de características
+.themed-caracteristica-card {
+  &:hover {
+    border-color: var(--theme-primary);
+    box-shadow: 0 10px 40px rgba(var(--theme-primary-rgb), 0.3);
+    
+    .themed-glow {
+      background: radial-gradient(circle at center, rgba(var(--theme-primary-rgb), 0.3), transparent);
+    }
+  }
+
+  h3 {
+    color: var(--theme-primary);
+  }
+}
+
+// Aplicar tema a tarjetas de valores
+.themed-valor-card {
+  &:hover {
+    box-shadow: 0 15px 40px rgba(var(--theme-primary-rgb), 0.3);
+  }
+}
+
+// Aplicar tema a tarjetas de equipo
+.themed-team-card {
+  .team-badge.themed-badge {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  }
+
+  &:hover {
+    box-shadow: 0 15px 50px rgba(var(--theme-primary-rgb), 0.4);
+  }
+}
+
+// Aplicar tema a CTA
+.themed-cta {
+  .themed-cta-button {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(var(--theme-primary-rgb), 0.5);
+    }
+
+    &::before {
+      background: linear-gradient(135deg, var(--theme-secondary), var(--theme-primary));
+    }
+  }
+}

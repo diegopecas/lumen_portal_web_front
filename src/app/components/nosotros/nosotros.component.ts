@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HeaderWebComponent } from '../../common/header-web/header-web.component';
+import { ThemeService, ThemeConfig } from '../../services/theme.service';
 
 // Importar AOS si está disponible, si no, comentar estas líneas
 declare var AOS: any;
@@ -15,9 +16,17 @@ declare var AOS: any;
 })
 export class NosotrosComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  public currentTheme!: ThemeConfig;
+
+  constructor(
+    private router: Router,
+    private themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
+    // Cargar tema actual
+    this.currentTheme = this.themeService.getCurrentTheme();
+    
     // Inicializar animaciones AOS si está disponible
     if (typeof AOS !== 'undefined') {
       AOS.init({
@@ -106,9 +115,6 @@ export class NosotrosComponent implements OnInit {
   }
 
   contactar(): void {
-    // Aquí puedes navegar a una página de contacto o abrir un modal
     this.router.navigate(['/contacto']);
-    // O si tienes un componente de contacto:
-    // this.dialog.open(ContactoComponent);
   }
 }
