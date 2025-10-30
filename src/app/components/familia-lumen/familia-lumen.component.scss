@@ -571,3 +571,245 @@ $shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
     }
 }
+// ========================================
+// Buscador de Documentos
+// ========================================
+.search-container {
+  max-width: 800px;
+  margin: 0 auto 40px;
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: $shadow-light;
+    transition: $transition-smooth;
+
+    &:focus-within {
+      box-shadow: $shadow-medium;
+      transform: translateY(-2px);
+    }
+
+    .search-icon {
+      font-size: 1.5rem;
+      color: #7f8c8d;
+    }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: #2c3e50;
+      background: transparent;
+
+      &::placeholder {
+        color: #bdc3c7;
+      }
+    }
+
+    .clear-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: $transition-smooth;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: #c0392b;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  // Themed Search Box
+  .themed-search-box {
+    &[data-theme="halloween"] {
+      border: 2px solid #ff8c00;
+      
+      &:focus-within {
+        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+      }
+    }
+
+    &[data-theme="christmas"] {
+      border: 2px solid #4dd0ff;
+      
+      &:focus-within {
+        box-shadow: 0 10px 30px rgba(77, 208, 255, 0.3);
+      }
+    }
+
+    &[data-theme="valentine"] {
+      border: 2px solid #ff1493;
+      
+      &:focus-within {
+        box-shadow: 0 10px 30px rgba(255, 20, 147, 0.3);
+      }
+    }
+  }
+
+  .search-results-info {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    font-weight: 600;
+
+    .no-results {
+      color: #e74c3c;
+    }
+  }
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 60px 20px;
+  
+  .no-results-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 25px;
+  }
+
+  .reset-btn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition-smooth;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+    }
+  }
+}
+
+// ========================================
+// Calendario Section - Botones Temáticos
+// ========================================
+.calendario-section {
+  .meses-selector {
+    .mes-btn {
+      padding: 12px 25px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #5f6368;
+      cursor: pointer;
+      transition: $transition-smooth;
+
+      &:hover:not(.disabled) {
+        background: rgba(255, 152, 0, 0.1);
+        border-color: #ff9800;
+        transform: translateY(-3px);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 5px 20px rgba(255, 152, 0, 0.4);
+      }
+
+      &.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+
+    // Themed Mes Buttons
+    .themed-mes-btn {
+      &[data-theme="halloween"] {
+        &:hover:not(.disabled) {
+          background: rgba(255, 140, 0, 0.1);
+          border-color: #ff8c00;
+        }
+
+        &.active {
+          background: linear-gradient(135deg, #ff8c00 0%, #8a2be2 100%);
+          box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+        }
+      }
+
+      &[data-theme="christmas"] {
+        &:hover:not(.disabled) {
+          background: rgba(77, 208, 255, 0.1);
+          border-color: #4dd0ff;
+        }
+
+        &.active {
+          background: linear-gradient(135deg, #4dd0ff 0%, #e0f4ff 100%);
+          color: #0a3a5a;
+          box-shadow: 0 5px 20px rgba(77, 208, 255, 0.4);
+        }
+      }
+
+      &[data-theme="valentine"] {
+        &:hover:not(.disabled) {
+          background: rgba(255, 20, 147, 0.1);
+          border-color: #ff1493;
+        }
+
+        &.active {
+          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+          box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
+        }
+      }
+    }
+  }
+}
+
+// ========================================
+// Responsive para Buscador
+// ========================================
+@media (max-width: 768px) {
+  .search-container {
+    .search-box {
+      padding: 12px 20px;
+
+      .search-icon {
+        font-size: 1.3rem;
+      }
+
+      .search-input {
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  .no-results-message {
+    padding: 40px 15px;
+
+    .no-results-icon {
+      font-size: 3.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}

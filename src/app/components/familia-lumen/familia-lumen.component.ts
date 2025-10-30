@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms'; 
 import { Router } from '@angular/router';
 import { HeaderWebComponent } from '../../common/header-web/header-web.component';
 import { ThemeService, ThemeConfig } from '../../services/theme.service';
@@ -35,7 +36,7 @@ interface CalendarioMes {
 @Component({
   selector: 'app-familia-lumen',
   standalone: true,
-  imports: [CommonModule, HeaderWebComponent, HttpClientModule],
+  imports: [CommonModule, HeaderWebComponent, HttpClientModule, FormsModule],
   templateUrl: './familia-lumen.component.html',
   styleUrl: './familia-lumen.component.scss'
 })
@@ -43,7 +44,9 @@ export class FamiliaLumenComponent implements OnInit {
 
   public currentTheme!: ThemeConfig;
   public categorias: CategoriaDocumento[] = [];
-  
+  public categoriasFiltradas: CategoriaDocumento[] = [];
+  public searchTerm: string = '';
+
   public calendarios: CalendarioMes[] = [];
   public mesActual: number = new Date().getMonth();
   public calendarioSeleccionado: CalendarioMes | null = null;
@@ -67,7 +70,7 @@ export class FamiliaLumenComponent implements OnInit {
     private router: Router,
     private themeService: ThemeService,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.currentTheme = this.themeService.getCurrentTheme();
@@ -90,6 +93,7 @@ export class FamiliaLumenComponent implements OnInit {
         next: (data) => {
           // Ordenar categorías por el campo 'orden'
           this.categorias = data.categorias.sort((a, b) => a.orden - b.orden);
+          this.categoriasFiltradas = [...this.categorias]; // Copia inicial
         },
         error: (error) => {
           console.error('Error loading documents:', error);
@@ -97,6 +101,46 @@ export class FamiliaLumenComponent implements OnInit {
       });
   }
 
+  // Nuevo método de búsqueda
+  onSearchChange(event: any): void {
+    this.searchTerm = event.target.value.toLowerCase().trim();
+
+    if (!this.searchTerm) {
+      // Si no hay búsqueda, mostrar todo
+      this.categoriasFiltradas = [...this.categorias];
+      return;
+    }
+
+    // Filtrar documentos por título o descripción
+    this.categoriasFiltradas = this.categorias
+      .map(categoria => {
+        const documentosFiltrados = categoria.documentos.filter(doc =>
+          doc.titulo.toLowerCase().includes(this.searchTerm) ||
+          doc.descripcion.toLowerCase().includes(this.searchTerm)
+        );
+
+        // Solo incluir categoría si tiene documentos que coincidan
+        if (documentosFiltrados.length > 0) {
+          return {
+            ...categoria,
+            documentos: documentosFiltrados
+          };
+        }
+        return null;
+      })
+      .filter(categoria => categoria !== null) as CategoriaDocumento[];
+  }
+
+  clearSearch(): void {
+    this.searchTerm = '';
+    this.categoriasFiltradas = [...this.categorias];
+  }
+getTotalDocumentos(): number {
+  return this.categoriasFiltradas.reduce(
+    (total, categoria) => total + categoria.documentos.length, 
+    0
+  );
+}
   private initCalendarios(): void {
     const meses = [
       'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
