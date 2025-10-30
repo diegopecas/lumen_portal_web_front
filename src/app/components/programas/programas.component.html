@@ -1,0 +1,227 @@
+<div class="programas-container" [attr.data-theme]="currentTheme.name">
+  
+  <!-- Header -->
+  <app-header-web 
+    [titulo]="'Nuestros Programas'" 
+    [breadcrumbs]="['Inicio', 'Programas']" 
+    [rutaVolver]="'/'">
+  </app-header-web>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up">
+        <h1 class="hero-title themed-title">
+          <span class="title-icon">✨</span>
+          Encuentra el Programa Perfecto
+          <span class="title-icon">✨</span>
+        </h1>
+        <p class="hero-subtitle">
+          Cada familia es diferente, cada niño es único. Por eso creamos programas diseñados para distintas etapas y necesidades.
+        </p>
+        <p class="hero-description">
+          Desde el cuidado amoroso de los más pequeños hasta el desarrollo de habilidades para el futuro.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programas Grid -->
+  <section class="programas-section">
+    <div class="container">
+      
+      <div class="programas-grid">
+        
+        <div 
+          *ngFor="let programa of programas; let i = index"
+          class="programa-card"
+          [attr.data-theme]="currentTheme.name"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100">
+          
+          <!-- Card Header -->
+          <div 
+            class="card-header"
+            [style.background]="programa.colorFondo">
+            
+            <div class="header-content">
+              <span class="programa-icono">{{ programa.icono }}</span>
+              <div class="header-text">
+                <h3 class="programa-nombre" [style.color]="programa.colorTexto">
+                  {{ programa.nombre }}
+                </h3>
+                <p class="programa-edades">{{ programa.edades }}</p>
+              </div>
+            </div>
+
+            <button 
+              class="ver-mas-btn"
+              (click)="abrirModal(programa)"
+              [attr.aria-label]="'Ver más sobre ' + programa.nombre">
+              <span class="plus-icon">+</span>
+            </button>
+
+          </div>
+
+          <!-- Card Body -->
+          <div class="card-body" (click)="abrirModal(programa)">
+            
+            <!-- Subtítulo -->
+            <h4 class="programa-subtitulo">{{ programa.subtitulo }}</h4>
+
+            <!-- Descripción -->
+            <p class="programa-descripcion">{{ programa.descripcion }}</p>
+
+            <!-- Click hint -->
+            <div class="click-hint">
+              <span class="hint-text">Click para ver más detalles</span>
+              <span class="hint-arrow">→</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content" data-aos="zoom-in">
+        
+        <div class="cta-icon-wrapper">
+          <span class="cta-icon">🎯</span>
+          <div class="cta-icon-glow"></div>
+        </div>
+
+        <h2 class="cta-title">¿Listo para dar el primer paso?</h2>
+        <p class="cta-description">
+          Nuestro equipo está listo para ayudarte a encontrar el programa perfecto para tu familia
+        </p>
+
+        <div class="cta-buttons">
+          <button 
+            class="cta-btn primary themed-cta-btn"
+            [attr.data-theme]="currentTheme.name"
+            (click)="irContacto()"
+            data-aos="fade-right"
+            data-aos-delay="100">
+            <span class="btn-icon">📞</span>
+            <span class="btn-text">Contáctanos Ahora</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <button 
+            class="cta-btn secondary"
+            (click)="agendarVisita()"
+            data-aos="fade-left"
+            data-aos-delay="200">
+            <span class="btn-icon">📅</span>
+            <span class="btn-text">Agendar Visita</span>
+          </button>
+        </div>
+
+        <!-- Info adicional -->
+        <div class="cta-extra-info" data-aos="fade-up" data-aos-delay="300">
+          <div class="info-item">
+            <span class="info-icon">🎁</span>
+            <div class="info-text">
+              <strong>Día Lumen de Cortesía</strong>
+              <p>Experiencia gratuita incluida</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div class="info-text">
+              <strong>Ubicación</strong>
+              <p>Vereda Fonquetá, Chía</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModal()">
+    <div class="modal-container" (click)="$event.stopPropagation()" *ngIf="programaSeleccionado">
+      
+      <!-- Modal Header -->
+      <div class="modal-header" [style.background]="programaSeleccionado.colorFondo">
+        <div class="modal-header-content">
+          <span class="modal-icono">{{ programaSeleccionado.icono }}</span>
+          <div class="modal-header-text">
+            <h2 class="modal-titulo" [style.color]="programaSeleccionado.colorTexto">
+              {{ programaSeleccionado.nombre }}
+            </h2>
+            <p class="modal-edades">{{ programaSeleccionado.edades }}</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" (click)="cerrarModal()">
+          <span>✕</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        
+        <!-- Subtítulo -->
+        <h3 class="modal-subtitulo">{{ programaSeleccionado.subtitulo }}</h3>
+
+        <!-- Descripción completa -->
+        <p class="modal-descripcion">
+          {{ programaSeleccionado.descripcion }}
+        </p>
+
+        <!-- Horarios -->
+        <div class="modal-horarios">
+          <h4 class="section-title">
+            <span class="icon">⏰</span>
+            Horarios
+          </h4>
+          <ul class="horarios-list">
+            <li *ngFor="let horario of programaSeleccionado.horarios">
+              {{ horario }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Características -->
+        <div class="modal-caracteristicas">
+          <h4 class="section-title">
+            <span class="icon">🌟</span>
+            Características destacadas
+          </h4>
+          <ul class="caracteristicas-list">
+            <li 
+              *ngFor="let caracteristica of programaSeleccionado.caracteristicas; let j = index"
+              class="caracteristica-item"
+              [style.animation-delay]="j * 0.05 + 's'">
+              <span class="check-icon">✓</span>
+              {{ caracteristica }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Botón de acción -->
+        <div class="modal-footer">
+          <button 
+            class="modal-cta-btn"
+            [style.background]="programaSeleccionado.colorFondo"
+            (click)="irContacto()">
+            <span class="btn-icon">💬</span>
+            <span>Más información sobre {{ programaSeleccionado.nombre }}</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

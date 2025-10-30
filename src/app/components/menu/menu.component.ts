@@ -163,7 +163,7 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
       { label: 'Nosotros', route: '/nosotros', icon: '/assets/images/nosotros.png' },
       { label: 'Programas', route: '/programas', icon: '/assets/images/programas.png' },
       { label: 'Admisión', route: '/admision', icon: '/assets/images/admision.png' },
-      { label: 'Galería', route: '/galeria', icon: '/assets/images/galeria.png' },
+      { label: 'Imagenes', route: '/galeria', icon: '/assets/images/galeria.png' },
       { label: 'Contacto', route: '/contacto', icon: '/assets/images/contacto.png' },
       { label: 'Familia Lumen', route: '/familia-lumen', icon: '/assets/images/familia-lumen.png' }
     ];

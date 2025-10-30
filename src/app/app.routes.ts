@@ -5,6 +5,7 @@ import { GaleriaComponent } from './components/galeria/galeria.component';
 import { FamiliaLumenComponent } from './components/familia-lumen/familia-lumen.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { AdmisionComponent } from './components/admision/admision.component';
+import { ProgramasComponent } from './components/programas/programas.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,10 @@ export const routes: Routes = [
   {
     path: 'nosotros',
     component: NosotrosComponent
+  },
+  {
+    path: 'programas',
+    component: ProgramasComponent
   },
   {
     path: 'galeria',
