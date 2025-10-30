@@ -64,6 +64,15 @@
         gap: 3rem;
         align-items: start;
 
+        // ✅ AGREGAR ESTAS LÍNEAS AQUÍ:
+        &.calendly-view {
+            grid-template-columns: 1fr !important;
+
+            .info-column {
+                display: none;
+            }
+        }
+
         @media (max-width: 1024px) {
             grid-template-columns: 1fr;
             gap: 2rem;
@@ -572,14 +581,27 @@
             }
 
             .calendly-widget {
-                min-height: 900px; // ✅ Aumentado de 700px a 900px
-                width: 100%;
+                min-height: 1100px !important;
+                height: 1100px;
+                width: 100% !important;
                 border-radius: 12px;
-                overflow: hidden;
+                overflow: visible !important;
                 margin-bottom: 2rem;
 
+                iframe {
+                    min-height: 1100px !important;
+                    height: 1100px !important;
+                    width: 100% !important;
+                }
+
                 @media (max-width: 768px) {
-                    min-height: 800px; // En móvil un poco menos
+                    min-height: 900px !important;
+                    height: 900px;
+
+                    iframe {
+                        min-height: 900px !important;
+                        height: 900px !important;
+                    }
                 }
             }
 
