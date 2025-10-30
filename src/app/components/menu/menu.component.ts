@@ -187,7 +187,6 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
       }));
     }
   }
-
   private initEffectCanvas(): void {
     if (!this.effectCanvas) return;
 

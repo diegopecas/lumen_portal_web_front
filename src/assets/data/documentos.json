@@ -1,0 +1,144 @@
+{
+  "categorias": [
+    {
+      "id": "manuales",
+      "titulo": "Manuales y Reglamentos",
+      "icono": "🏫",
+      "descripcion": "Documentos institucionales importantes",
+      "orden": 1,
+      "documentos": [
+        {
+          "id": 1,
+          "titulo": "Manual de Convivencia",
+          "descripcion": "Lineamientos de convivencia y normas institucionales",
+          "archivo": "Manual_Convivencia_Lumen.pdf",
+          "icono": "📖",
+          "carpeta": "manuales"
+        },
+        {
+          "id": 2,
+          "titulo": "Resumen Proceso de Matrícula",
+          "descripcion": "Información completa sobre el proceso de matrícula",
+          "archivo": "ResumenInformacionProcesoMatricula.pdf",
+          "icono": "📝",
+          "carpeta": "manuales"
+        }
+      ]
+    },
+    {
+      "id": "protocolos-aula",
+      "titulo": "Protocolos de Gestión del Aula",
+      "icono": "📋",
+      "descripcion": "Lineamientos para la gestión pedagógica",
+      "orden": 2,
+      "documentos": [
+        {
+          "id": 3,
+          "titulo": "Ejecución de Clases",
+          "descripcion": "Planificación y desarrollo de actividades educativas",
+          "archivo": "Protocolo_Ejecucion_Clases.pdf",
+          "icono": "👩‍🏫",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 4,
+          "titulo": "Novedades del Aula",
+          "descripcion": "Documentación de eventos significativos en el aula",
+          "archivo": "Protocolo_Novedades_Aula.pdf",
+          "icono": "📢",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 5,
+          "titulo": "Corrección de Comportamiento",
+          "descripcion": "Estrategias para promover comportamientos positivos",
+          "archivo": "Protocolo_Corregir_Comportamiento.pdf",
+          "icono": "🎯",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 6,
+          "titulo": "Desbordes Emocionales",
+          "descripcion": "Acompañamiento en situaciones de frustración o enojo",
+          "archivo": "Protocolo_Acompanar_Desbordes_Emocionales.pdf",
+          "icono": "💙",
+          "carpeta": "protocolos"
+        }
+      ]
+    },
+    {
+      "id": "protocolos-cuidado",
+      "titulo": "Protocolos de Cuidado Infantil",
+      "icono": "👶",
+      "descripcion": "Directrices para el bienestar de los niños",
+      "orden": 3,
+      "documentos": [
+        {
+          "id": 7,
+          "titulo": "Gestión de Higiene de los Niños",
+          "descripcion": "Garantía de limpieza y comodidad durante la jornada",
+          "archivo": "Protocolo_Gestion_Higiene_Ninos.pdf",
+          "icono": "🧼",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 8,
+          "titulo": "Administración de Medicamentos",
+          "descripcion": "Administración segura de medicamentos",
+          "archivo": "Protocolo_Administracion_Medicamentos.pdf",
+          "icono": "💊",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 9,
+          "titulo": "Manejo de Enfermedades",
+          "descripcion": "Identificación y manejo de síntomas de enfermedad",
+          "archivo": "Protocolo_Manejo_Enfermedades.pdf",
+          "icono": "🏥",
+          "carpeta": "protocolos"
+        }
+      ]
+    },
+    {
+      "id": "protocolos-convivencia",
+      "titulo": "Protocolos de Convivencia",
+      "icono": "🤝",
+      "descripcion": "Procedimientos para la resolución de conflictos",
+      "orden": 4,
+      "documentos": [
+        {
+          "id": 10,
+          "titulo": "Resolución de Conflictos",
+          "descripcion": "Procedimientos para abordar y resolver conflictos",
+          "archivo": "Protocolo_Resolucion_Conflictos.pdf",
+          "icono": "🤝",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 11,
+          "titulo": "Incumplimiento de Deberes del Estudiante",
+          "descripcion": "Atención a conductas que afectan la convivencia",
+          "archivo": "Protocolo_Incumplimiento_Deberes_Estudiante.pdf",
+          "icono": "⚠️",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 12,
+          "titulo": "Mediación y Restauración (PMR)",
+          "descripcion": "Resolución de conflictos y restauración de vínculos",
+          "archivo": "Protocolo_Mediacion_Restauracion_PMR.pdf",
+          "icono": "🕊️",
+          "carpeta": "protocolos"
+        },
+        {
+          "id": 13,
+          "titulo": "Gestión de Inconformidades (PGRI)",
+          "descripcion": "Procedimiento para abordar inconformidades con empleados",
+          "archivo": "Protocolo_Gestion_Inconformidades_PGRI.pdf",
+          "icono": "📨",
+          "carpeta": "protocolos"
+        }
+      ]
+    }
+  ]
+}

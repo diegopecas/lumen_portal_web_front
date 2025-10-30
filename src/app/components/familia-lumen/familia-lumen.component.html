@@ -1,0 +1,141 @@
+<div class="familia-container" [attr.data-theme]="currentTheme.name">
+    <!-- Header -->
+    <app-header-web [titulo]="'Familia Lumen'" [breadcrumbs]="['Inicio', 'Familia Lumen']" [rutaVolver]="'/'">
+    </app-header-web>
+
+    <!-- Hero Section con Botón Portal -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <h2 class="hero-title themed-title">Bienvenidos a Familia Lumen</h2>
+                <p class="hero-description">
+                    Tu espacio para acceder a documentos importantes, calendarios y el portal de padres
+                </p>
+
+                <!-- Botón Principal Portal de Padres -->
+                <button class="portal-btn themed-portal-btn" [attr.data-theme]="currentTheme.name"
+                    (click)="goToPortalPadres()" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="portal-icon">🔐</span>
+                    <span class="portal-text">
+                        <strong>Portal Familia Lumen</strong>
+                        <small>Accede a tu información y seguimiento</small>
+                    </span>
+                    <span class="portal-arrow">→</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calendario Mensual -->
+    <section class="calendario-section">
+        <div class="container">
+            <h3 class="section-title" data-aos="fade-up">
+                <span class="title-icon">📅</span>
+                Calendario del Mes
+            </h3>
+
+            <!-- Selector de Meses -->
+            <div class="meses-selector" data-aos="fade-up" data-aos-delay="100">
+                <button *ngFor="let calendario of calendarios" class="mes-btn"
+                    [class.active]="calendarioSeleccionado?.numero === calendario.numero"
+                    [class.disabled]="!calendario.disponible" [disabled]="!calendario.disponible"
+                    (click)="seleccionarCalendario(calendario)">
+                    {{ calendario.mes }}
+                </button>
+            </div>
+
+            <!-- Visualizador de Calendario -->
+            <div class="calendario-viewer" *ngIf="calendarioSeleccionado" data-aos="fade-up" data-aos-delay="200">
+                <img [src]="calendarioSeleccionado.imagen" [alt]="'Calendario ' + calendarioSeleccionado.mes"
+                    class="calendario-img">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Documentos -->
+    <section class="documentos-section">
+        <div class="container">
+            <h3 class="section-title" data-aos="fade-up">
+                <span class="title-icon">📚</span>
+                Documentos Importantes
+            </h3>
+
+            <!-- Iterar dinámicamente sobre todas las categorías -->
+            <div *ngFor="let categoria of categorias" class="categoria-documentos" data-aos="fade-up">
+
+                <h4 class="categoria-title">
+                    {{ categoria.icono }} {{ categoria.titulo }}
+                </h4>
+
+                <p class="categoria-descripcion" *ngIf="categoria.descripcion">
+                    {{ categoria.descripcion }}
+                </p>
+
+                <div class="documentos-grid">
+                    <div *ngFor="let doc of categoria.documentos" class="doc-card themed-doc-card"
+                        [attr.data-theme]="currentTheme.name" (click)="downloadDocument(doc)">
+                        <div class="doc-icon">{{ doc.icono }}</div>
+                        <div class="doc-info">
+                            <h5 class="doc-title">{{ doc.titulo }}</h5>
+                            <p class="doc-description">{{ doc.descripcion }}</p>
+                        </div>
+                        <div class="doc-action">
+                            <span class="download-icon">⬇️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <section class="contacto-section">
+        <div class="container">
+            <h3 class="section-title" data-aos="fade-up">
+                <span class="title-icon">📞</span>
+                Información de Contacto
+            </h3>
+
+            <div class="contacto-grid">
+                <!-- Correos -->
+                <div class="contacto-card" data-aos="fade-up">
+                    <div class="contacto-icon">📧</div>
+                    <h4>Correos Electrónicos</h4>
+                    <a *ngFor="let correo of contactInfo.correos" [href]="'mailto:' + correo" class="contacto-link">
+                        {{ correo }}
+                    </a>
+                </div>
+
+                <!-- Teléfono / WhatsApp -->
+                <div class="contacto-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contacto-icon">📱</div>
+                    <h4>Teléfono / WhatsApp</h4>
+                    <p>{{ contactInfo.telefono }}</p>
+                    <button class="whatsapp-btn" (click)="sendWhatsApp()">
+                        💬 Escribir por WhatsApp
+                    </button>
+                </div>
+
+                <!-- Horarios -->
+                <div class="contacto-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contacto-icon">🕐</div>
+                    <h4>Horarios de Atención</h4>
+                    <p><strong>Lunes a Viernes:</strong> {{ contactInfo.horarios.lunesViernes }}</p>
+                    <p><strong>Extendido:</strong> {{ contactInfo.horarios.extendido }}</p>
+                    <p><strong>Sábados:</strong> {{ contactInfo.horarios.sabados }}</p>
+                </div>
+
+                <!-- Ubicación -->
+                <div class="contacto-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="contacto-icon">📍</div>
+                    <h4>Ubicación</h4>
+                    <p>{{ contactInfo.ubicacion.direccion }}</p>
+                    <button class="maps-btn" (click)="openMaps()">
+                        🗺️ Ver en Google Maps
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

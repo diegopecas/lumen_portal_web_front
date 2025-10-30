@@ -1,0 +1,573 @@
+// ========================================
+// Variables y Mixins
+// ========================================
+$transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+$shadow-light: 0 5px 20px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+// ========================================
+// Container Principal
+// ========================================
+.familia-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+// ========================================
+// Hero Section
+// ========================================
+.hero-section {
+    padding: 80px 0 60px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+        &.themed-title[data-theme="halloween"] {
+            color: #ff8c00;
+        }
+
+        &.themed-title[data-theme="christmas"] {
+            color: #4dd0ff;
+        }
+
+        &.themed-title[data-theme="valentine"] {
+            color: #ff1493;
+        }
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+        color: #7f8c8d;
+        margin-bottom: 40px;
+        line-height: 1.8;
+    }
+
+    // Botón Portal de Padres
+    .portal-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 20px;
+        padding: 25px 50px;
+        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        color: white;
+        border: none;
+        border-radius: 60px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        box-shadow: 0 10px 35px rgba(255, 152, 0, 0.5);
+        cursor: pointer;
+        transition: $transition-smooth;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .portal-icon {
+            font-size: 2.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .portal-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+
+            strong {
+                font-size: 1.4rem;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            small {
+                font-size: 0.9rem;
+                opacity: 0.95;
+                font-weight: 400;
+            }
+        }
+
+        .portal-arrow {
+            font-size: 2rem;
+            transition: transform 0.4s ease;
+        }
+
+        &:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 152, 0, 0.7);
+
+            &::before {
+                left: 100%;
+            }
+
+            .portal-arrow {
+                transform: translateX(10px);
+            }
+        }
+
+        &:active {
+            transform: translateY(-4px) scale(1.02);
+        }
+    }
+
+    // Themed Portal Button
+    .themed-portal-btn {
+        &[data-theme="halloween"] {
+            background: linear-gradient(135deg, #ff8c00 0%, #8a2be2 100%);
+            box-shadow: 0 10px 35px rgba(255, 140, 0, 0.5);
+
+            &:hover {
+                box-shadow: 0 20px 50px rgba(255, 140, 0, 0.7);
+            }
+        }
+
+        &[data-theme="christmas"] {
+            background: linear-gradient(135deg, #4dd0ff 0%, #e0f4ff 100%);
+            color: #0a3a5a;
+            box-shadow: 0 10px 35px rgba(77, 208, 255, 0.5);
+
+            &:hover {
+                box-shadow: 0 20px 50px rgba(77, 208, 255, 0.7);
+            }
+        }
+
+        &[data-theme="valentine"] {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            box-shadow: 0 10px 35px rgba(255, 20, 147, 0.5);
+
+            &:hover {
+                box-shadow: 0 20px 50px rgba(255, 20, 147, 0.7);
+            }
+        }
+    }
+}
+
+// ========================================
+// Calendario Section
+// ========================================
+.calendario-section {
+    padding: 60px 0;
+    background: white;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .title-icon {
+            font-size: 3rem;
+        }
+    }
+
+    .meses-selector {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+
+        .mes-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5f6368;
+            cursor: pointer;
+            transition: $transition-smooth;
+
+            &:hover:not(.disabled) {
+                background: rgba(255, 152, 0, 0.1);
+                border-color: #ff9800;
+                transform: translateY(-3px);
+            }
+
+            &.active {
+                background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+                color: white;
+                border-color: transparent;
+                box-shadow: 0 5px 20px rgba(255, 152, 0, 0.4);
+            }
+
+            &.disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .calendario-viewer {
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: $shadow-medium;
+
+        .calendario-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+}
+
+// ========================================
+// Documentos Section
+// ========================================
+.documentos-section {
+    padding: 60px 0 80px;
+    background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .title-icon {
+            font-size: 3rem;
+        }
+    }
+
+    .categoria-documentos {
+        margin-bottom: 50px;
+
+        .categoria-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #34495e;
+            margin-bottom: 10px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ff9800;
+        }
+
+        .categoria-descripcion {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .documentos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .doc-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: $shadow-light;
+            cursor: pointer;
+            transition: $transition-smooth;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: $shadow-heavy;
+            }
+
+            .doc-icon {
+                font-size: 2.5rem;
+                min-width: 60px;
+                text-align: center;
+            }
+
+            .doc-info {
+                flex: 1;
+
+                .doc-title {
+                    font-size: 1.1rem;
+                    font-weight: 700;
+                    color: #2c3e50;
+                    margin-bottom: 5px;
+                }
+
+                .doc-description {
+                    font-size: 0.9rem;
+                    color: #7f8c8d;
+                    line-height: 1.4;
+                }
+            }
+
+            .doc-action {
+                .download-icon {
+                    font-size: 1.5rem;
+                    transition: transform 0.3s ease;
+                }
+            }
+
+            &:hover .download-icon {
+                transform: translateY(3px);
+            }
+        }
+
+        // Themed Doc Cards
+        .themed-doc-card {
+            &[data-theme="halloween"]:hover {
+                box-shadow: 0 15px 40px rgba(255, 140, 0, 0.3);
+            }
+
+            &[data-theme="christmas"]:hover {
+                box-shadow: 0 15px 40px rgba(77, 208, 255, 0.3);
+            }
+
+            &[data-theme="valentine"]:hover {
+                box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+            }
+        }
+    }
+}
+
+// ========================================
+// Contacto Section
+// ========================================
+.contacto-section {
+    padding: 60px 0 80px;
+    background: white;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        .title-icon {
+            font-size: 3rem;
+        }
+    }
+
+    .contacto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .contacto-card {
+        padding: 30px;
+        background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+        border-radius: 20px;
+        box-shadow: $shadow-light;
+        text-align: center;
+        transition: $transition-smooth;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: $shadow-heavy;
+        }
+
+        .contacto-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #5f6368;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .contacto-link {
+            display: block;
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #ff5722;
+            }
+        }
+
+        .whatsapp-btn,
+        .maps-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: $transition-smooth;
+            margin-top: 15px;
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            }
+        }
+
+        .maps-btn {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+
+            &:hover {
+                box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+            }
+        }
+    }
+}
+
+// ========================================
+// Animaciones
+// ========================================
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0 40px;
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+        }
+
+        .portal-btn {
+            padding: 20px 35px;
+            font-size: 1rem;
+            gap: 15px;
+
+            .portal-icon {
+                font-size: 2rem;
+            }
+
+            .portal-text {
+                strong {
+                    font-size: 1.1rem;
+                }
+
+                small {
+                    font-size: 0.8rem;
+                }
+            }
+
+            .portal-arrow {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .calendario-section,
+    .documentos-section,
+    .contacto-section {
+        padding: 40px 0;
+
+        .section-title {
+            font-size: 2rem;
+
+            .title-icon {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    .meses-selector {
+        .mes-btn {
+            padding: 10px 18px;
+            font-size: 0.9rem;
+        }
+    }
+
+    .categoria-documentos {
+        .categoria-title {
+            font-size: 1.5rem;
+        }
+    }
+}
