@@ -4,6 +4,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { FamiliaLumenComponent } from './components/familia-lumen/familia-lumen.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { AdmisionComponent } from './components/admision/admision.component';
 
 export const routes: Routes = [
   {
@@ -25,5 +26,9 @@ export const routes: Routes = [
   {
     path: 'contacto',
     component: ContactoComponent
+  },
+  {
+    path: 'admision',
+    component: AdmisionComponent
   }
 ];

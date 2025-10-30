@@ -1,0 +1,211 @@
+<div class="admision-container" [attr.data-theme]="currentTheme.name">
+  
+  <!-- Header -->
+  <app-header-web 
+    [titulo]="'Proceso de Admisión'" 
+    [breadcrumbs]="['Inicio', 'Admisión']" 
+    [rutaVolver]="'/'">
+  </app-header-web>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up">
+        <h1 class="hero-title themed-title">
+          <span class="title-icon">✨</span>
+          Únete a la Familia Lumen
+          <span class="title-icon">✨</span>
+        </h1>
+        <p class="hero-subtitle">
+          Un proceso transparente y sencillo para que tu hijo(a) comience su aventura de aprendizaje
+        </p>
+        <div class="hero-badges">
+          <span class="badge" data-aos="zoom-in" data-aos-delay="100">
+            👶 Desde 4 meses
+          </span>
+          <span class="badge" data-aos="zoom-in" data-aos-delay="200">
+            🎓 Hasta 6 años
+          </span>
+          <span class="badge" data-aos="zoom-in" data-aos-delay="300">
+            ⏰ Horarios flexibles
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section">
+    <div class="container">
+      
+      <!-- Timeline Header -->
+      <div class="timeline-header" data-aos="fade-up">
+        <h2 class="section-title">
+          <span class="title-icon">🗓️</span>
+          Pasos del Proceso
+        </h2>
+        <p class="section-description">
+          Sigue estos simples pasos para ser parte de nuestra comunidad educativa
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        
+        <!-- Línea vertical animada -->
+        <div class="timeline-line"></div>
+
+        <!-- Pasos -->
+        <div 
+          *ngFor="let paso of pasos; let i = index"
+          class="timeline-item"
+          [class.opcional]="paso.esOpcional"
+          [class.expandido]="paso.expandido"
+          [attr.data-theme]="currentTheme.name"
+          data-aos="fade-up"
+          [attr.data-aos-delay]="i * 100">
+          
+          <!-- Número del paso -->
+          <div class="timeline-number">
+            <span class="number-circle">{{ paso.id }}</span>
+            <div class="number-pulse"></div>
+          </div>
+
+          <!-- Contenido del paso -->
+          <div 
+            class="timeline-content themed-card"
+            (click)="togglePaso(paso)">
+            
+            <!-- Header del Card -->
+            <div class="card-header">
+              <div class="header-left">
+                <span class="paso-icono">{{ paso.icono }}</span>
+                <div class="header-text">
+                  <h3 class="paso-titulo">
+                    {{ paso.titulo }}
+                    <span class="opcional-badge" *ngIf="paso.esOpcional">Opcional</span>
+                  </h3>
+                  <p class="paso-subtitulo">{{ paso.subtitulo }}</p>
+                </div>
+              </div>
+              <div class="header-right">
+                <span class="expand-icon" [class.rotated]="paso.expandido">
+                  {{ paso.expandido ? '−' : '+' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Descripción -->
+            <div class="card-description">
+              <p>{{ paso.descripcion }}</p>
+            </div>
+
+            <!-- Detalles expandibles -->
+            <div class="card-details" *ngIf="paso.expandido">
+              <div class="details-divider"></div>
+              <h4 class="details-title">
+                <span class="details-icon">📌</span>
+                ¿Qué incluye?
+              </h4>
+              <ul class="details-list">
+                <li 
+                  *ngFor="let detalle of paso.detalles; let j = index"
+                  class="detail-item"
+                  [style.animation-delay]="j * 0.05 + 's'">
+                  <span class="check-icon">✓</span>
+                  {{ detalle }}
+                </li>
+              </ul>
+            </div>
+
+            <!-- Click indicator -->
+            <div class="click-hint" *ngIf="!paso.expandido">
+              <span class="hint-text">Click para ver más detalles</span>
+              <span class="hint-arrow">↓</span>
+            </div>
+
+          </div>
+
+          <!-- Connector para el siguiente paso -->
+          <div class="timeline-connector" *ngIf="i < pasos.length - 1">
+            <div class="connector-dot"></div>
+            <div class="connector-dot"></div>
+            <div class="connector-dot"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content" data-aos="zoom-in">
+        
+        <div class="cta-icon-wrapper">
+          <span class="cta-icon">🚀</span>
+          <div class="cta-icon-glow"></div>
+        </div>
+
+        <h2 class="cta-title">¿Listo para comenzar?</h2>
+        <p class="cta-description">
+          Nuestro equipo está listo para acompañarte en cada paso del proceso
+        </p>
+
+        <div class="cta-buttons">
+          <button 
+            class="cta-btn primary themed-cta-btn"
+            [attr.data-theme]="currentTheme.name"
+            (click)="irContacto()"
+            data-aos="fade-right"
+            data-aos-delay="100">
+            <span class="btn-icon">📞</span>
+            <span class="btn-text">Contáctanos Ahora</span>
+            <span class="btn-arrow">→</span>
+          </button>
+
+          <button 
+            class="cta-btn secondary"
+            (click)="agendarVisita()"
+            data-aos="fade-left"
+            data-aos-delay="200">
+            <span class="btn-icon">📅</span>
+            <span class="btn-text">Agendar Visita</span>
+          </button>
+        </div>
+
+        <!-- Info adicional -->
+        <div class="cta-extra-info" data-aos="fade-up" data-aos-delay="300">
+          <div class="info-item">
+            <span class="info-icon">⏰</span>
+            <div class="info-text">
+              <strong>Horario de atención</strong>
+              <p>Lunes a Viernes: 6:30 AM - 5:30 PM</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div class="info-text">
+              <strong>Ubicación</strong>
+              <p>Vereda Fonquetá, Chía</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Confetti Animation -->
+  <div class="confetti-container" *ngIf="mostrarConfetti">
+    <div class="confetti" *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]" 
+         [style.left.%]="item * 10"
+         [style.animation-delay]="item * 0.1 + 's'">
+      {{ currentTheme.decorativeElements[item % currentTheme.decorativeElements.length] }}
+    </div>
+  </div>
+
+</div>
