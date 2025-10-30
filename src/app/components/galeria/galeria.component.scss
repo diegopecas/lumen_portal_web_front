@@ -644,3 +644,299 @@ $transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     }
 }
+// ========================================
+// Instagram CTA (Call To Action)
+// ========================================
+.instagram-cta {
+  padding: 80px 20px !important;
+  background: linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%);
+  border-radius: 20px;
+  margin: 40px 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+
+  .cta-text {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+  }
+
+  // Botón de Instagram
+  .instagram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 35px;
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(131, 58, 180, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .instagram-icon {
+      font-size: 2rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .btn-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+
+      strong {
+        font-size: 1.2rem;
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      small {
+        font-size: 0.85rem;
+        opacity: 0.9;
+        font-weight: 400;
+      }
+    }
+
+    .btn-arrow {
+      font-size: 1.5rem;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(131, 58, 180, 0.6);
+
+      &::before {
+        left: 100%;
+      }
+
+      .btn-arrow {
+        transform: translateX(5px);
+      }
+    }
+
+    &:active {
+      transform: translateY(-2px) scale(1.02);
+    }
+  }
+
+  // Stats debajo del botón
+  .social-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(131, 58, 180, 0.1);
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &:hover {
+        background: rgba(131, 58, 180, 0.2);
+        transform: translateY(-3px);
+      }
+
+      .stat-icon {
+        font-size: 1.5rem;
+      }
+
+      .stat-text {
+        font-size: 0.9rem;
+        color: #5f6368;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Themed Instagram Button
+.themed-instagram-btn {
+  &[data-theme="halloween"] {
+    background: linear-gradient(135deg, #ff8c00 0%, #8a2be2 100%);
+    box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(255, 140, 0, 0.6);
+    }
+  }
+
+  &[data-theme="christmas"] {
+    background: linear-gradient(135deg, #4dd0ff 0%, #e0f4ff 100%);
+    color: #0a3a5a;
+    box-shadow: 0 8px 25px rgba(77, 208, 255, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(77, 208, 255, 0.6);
+    }
+  }
+
+  &[data-theme="valentine"] {
+    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+    box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(255, 20, 147, 0.6);
+    }
+  }
+
+  &[data-theme="spring"] {
+    background: linear-gradient(135deg, #32cd32 0%, #ff69b4 100%);
+    box-shadow: 0 8px 25px rgba(50, 205, 50, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(50, 205, 50, 0.6);
+    }
+  }
+
+  &[data-theme="summer"] {
+    background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+    }
+  }
+
+  &[data-theme="colombia-day"] {
+    background: linear-gradient(135deg, #fcd116 0%, #ce1126 100%);
+    box-shadow: 0 8px 25px rgba(252, 209, 22, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(252, 209, 22, 0.6);
+    }
+  }
+
+  &[data-theme="new-year"] {
+    background: linear-gradient(135deg, #ffd700 0%, #ff1493 100%);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+
+    &:hover {
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+    }
+  }
+}
+
+// ========================================
+// Animaciones
+// ========================================
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+// ========================================
+// Responsive
+// ========================================
+@media (max-width: 768px) {
+  .instagram-cta {
+    padding: 60px 15px !important;
+    margin: 30px 0;
+
+    .cta-icon {
+      font-size: 3rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    .cta-text {
+      font-size: 1rem;
+    }
+
+    .instagram-btn {
+      padding: 15px 25px;
+      font-size: 1rem;
+      gap: 12px;
+
+      .instagram-icon {
+        font-size: 1.5rem;
+      }
+
+      .btn-text {
+        strong {
+          font-size: 1rem;
+        }
+
+        small {
+          font-size: 0.75rem;
+        }
+      }
+
+      .btn-arrow {
+        font-size: 1.2rem;
+      }
+    }
+
+    .social-stats {
+      gap: 15px;
+      margin-top: 30px;
+
+      .stat-item {
+        padding: 10px 15px;
+
+        .stat-icon {
+          font-size: 1.2rem;
+        }
+
+        .stat-text {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

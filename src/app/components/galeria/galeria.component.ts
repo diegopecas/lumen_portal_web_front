@@ -173,4 +173,7 @@ export class GaleriaComponent implements OnInit {
     onImageLoad(image: GalleryImage): void {
         image.loaded = true;
     }
+    trackInstagramClick(): void {
+        console.log('Usuario hizo clic en Instagram desde la galería');
+    }
 }

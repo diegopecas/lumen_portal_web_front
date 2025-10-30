@@ -1,9 +1,6 @@
 <div class="galeria-container" [attr.data-theme]="currentTheme.name">
   <!-- Header -->
-  <app-header-web 
-    [titulo]="'Galería'" 
-    [breadcrumbs]="['Inicio', 'Galería']"
-    [rutaVolver]="'/'">
+  <app-header-web [titulo]="'Galería'" [breadcrumbs]="['Inicio', 'Galería']" [rutaVolver]="'/'">
   </app-header-web>
 
   <!-- Hero Section -->
@@ -22,19 +19,12 @@
   <section class="gallery-section">
     <div class="container">
       <div class="masonry-grid">
-        <div 
-          *ngFor="let image of displayedImages; let i = index"
-          class="gallery-item themed-gallery-item"
-          [attr.data-aos]="'fade-up'"
-          [attr.data-aos-delay]="(i % (isMobile ? 12 : 18)) * 50"
+        <div *ngFor="let image of displayedImages; let i = index" class="gallery-item themed-gallery-item"
+          [attr.data-aos]="'fade-up'" [attr.data-aos-delay]="(i % (isMobile ? 12 : 18)) * 50"
           (click)="openLightbox(image)">
-          
+
           <div class="image-wrapper" [class.loaded]="image.loaded">
-            <img 
-              [src]="image.url" 
-              [alt]="image.alt"
-              (load)="onImageLoad(image)"
-              loading="lazy">
+            <img [src]="image.url" [alt]="image.alt" (load)="onImageLoad(image)" loading="lazy">
             <div class="image-overlay themed-overlay">
               <div class="overlay-content">
                 <span class="view-icon">🔍</span>
@@ -51,9 +41,40 @@
         <p>Cargando más imágenes...</p>
       </div>
 
-      <!-- End Message -->
-      <div class="end-message" *ngIf="currentIndex >= allImages.length && !isLoading">
-        <p>✨ Has visto todas nuestras fotos ✨</p>
+      <!-- End Message con Instagram -->
+      <div class="end-message instagram-cta"
+        *ngIf="currentIndex >= allImages.length && !isLoading && displayedImages.length > 0">
+        <div class="cta-content" data-aos="fade-up">
+          <div class="cta-icon">✨</div>
+          <h3>Has visto todas nuestras fotos</h3>
+          <p class="cta-text">¡Pero puedes continuar viendo nuestras aventuras!</p>
+
+          <a href="https://www.instagram.com/liceolumen/" target="_blank" rel="noopener noreferrer"
+            class="instagram-btn themed-instagram-btn" [attr.data-theme]="currentTheme.name"
+            (click)="trackInstagramClick()">
+            <span class="instagram-icon">📷</span>
+            <span class="btn-text">
+              <strong>&#64;liceolumen</strong>
+              <small>Síguenos en Instagram</small>
+            </span>
+            <span class="btn-arrow">→</span>
+          </a>
+
+          <div class="social-stats">
+            <div class="stat-item">
+              <span class="stat-icon">📸</span>
+              <span class="stat-text">Fotos diarias</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">🎬</span>
+              <span class="stat-text">Videos exclusivos</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-icon">🌟</span>
+              <span class="stat-text">Eventos en vivo</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -61,15 +82,13 @@
   <!-- Lightbox -->
   <div class="lightbox" *ngIf="selectedImage" (click)="closeLightbox()">
     <div class="lightbox-overlay"></div>
-    
+
     <div class="lightbox-content" (click)="$event.stopPropagation()">
       <button class="lightbox-close themed-button" (click)="closeLightbox()">
         ✕
       </button>
 
-      <button 
-        class="lightbox-nav lightbox-prev themed-button" 
-        (click)="previousImage()"
+      <button class="lightbox-nav lightbox-prev themed-button" (click)="previousImage()"
         *ngIf="displayedImages.indexOf(selectedImage) > 0">
         ‹
       </button>
@@ -78,9 +97,7 @@
         <img [src]="selectedImage.url" [alt]="selectedImage.alt">
       </div>
 
-      <button 
-        class="lightbox-nav lightbox-next themed-button" 
-        (click)="nextImage()"
+      <button class="lightbox-nav lightbox-next themed-button" (click)="nextImage()"
         *ngIf="displayedImages.indexOf(selectedImage) < displayedImages.length - 1">
         ›
       </button>
