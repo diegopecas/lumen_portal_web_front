@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, HostListene
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeConfig } from '../../services/theme.service';
+import { AnalyticsService } from '../../services/analytics.service';
 import { PortalMessageComponent } from '../portal-message/portal-message.component';
 import { ContactoModalComponent } from '../contacto-modal/contacto-modal.component';
 
@@ -71,16 +72,19 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
   private animationId: number | null = null;
   private constellationAnimationId: number | null = null;
 
+  // Para tracking de hover (evitar múltiples eventos)
+  private portalHoverTracked = false;
+
   constructor(
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private analyticsService: AnalyticsService
   ) {
     this.checkScreenSize();
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.getCurrentTheme();
-    console.log('Tema del menú:', this.currentTheme.name);
 
     this.generateStars();
     this.generateFloatingParticles();
@@ -315,9 +319,19 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     drawConnections();
   }
 
+  /**
+   * ✅ MODIFICADO: Agregar tracking de hover sobre el portal
+   */
   onPortalHover(isHovering: boolean): void {
-    if (isHovering) {
-      console.log('Portal hover!');
+    if (isHovering && !this.portalHoverTracked) {
+      // Enviar evento a Google Analytics
+      this.analyticsService.trackPortalHover();
+      this.portalHoverTracked = true;
+      
+      // Resetear después de 5 segundos para permitir re-tracking
+      setTimeout(() => {
+        this.portalHoverTracked = false;
+      }, 5000);
     }
   }
 
@@ -329,7 +343,15 @@ export class MenuComponent implements AfterViewInit, OnDestroy {
     this.highlightedIndex = null;
   }
 
+  /**
+   * ✅ MODIFICADO: Agregar tracking de clic en opción del menú
+   */
   selectOption(path: string, index: number): void {
+    const option = this.menuOptions[index];
+    
+    // 📊 Enviar evento a Google Analytics ANTES de navegar
+    this.analyticsService.trackMenuOptionClick(option.label, path);
+
     // Crear explosión de partículas
     this.createExplosion(index);
 

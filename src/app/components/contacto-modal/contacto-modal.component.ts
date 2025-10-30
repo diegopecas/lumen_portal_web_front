@@ -129,7 +129,6 @@ export class ContactoModalComponent implements OnInit, OnDestroy {
             next: (response) => {
                 if (response.success) {
                     this.catalogos = response.catalogos;
-                    console.log('Catálogos cargados:', this.catalogos);
                 }
             },
             error: (error) => {

@@ -51,7 +51,7 @@ export class ContactoService {
     obtenerCatalogos(): Observable<{ success: boolean; catalogos: Catalogos }> {
         return this.http.get<{ success: boolean; catalogos: Catalogos }>(`${this.apiUrl}/catalogos`).pipe(
             tap(response => {
-                console.log('Catálogos obtenidos:', response);
+                
             }),
             catchError(error => {
                 console.error('Error obteniendo catálogos:', error);
