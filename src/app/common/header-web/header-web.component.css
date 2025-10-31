@@ -3,7 +3,7 @@
   --secondary-color: #ff8c00;
   --glow-color: rgba(255, 189, 49, 0.6);
 
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
