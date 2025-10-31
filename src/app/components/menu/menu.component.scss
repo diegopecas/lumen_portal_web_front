@@ -1,12 +1,12 @@
 // Variables CSS por tema
 .constellation-menu {
-  --bg-gradient: linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 50%, #2d1b3d 100%);
-  --primary-color: #ff8c00;
-  --secondary-color: #8a2be2;
-  --accent-color: #dda0dd;
-  --glow-primary: rgba(255, 140, 0, 0.8);
-  --glow-secondary: rgba(138, 43, 226, 0.8);
-  --cloud-color: rgba(138, 43, 226, 0.08);
+  --bg-gradient: linear-gradient(to bottom, #f5f0e8 0%, #e8dcc8 50%, #d4c4a8 100%);
+  --primary-color: #d99058;
+  --secondary-color: #c1774a;
+  --accent-color: #fce4d3;
+  --glow-primary: rgba(217, 144, 88, 0.8);
+  --glow-secondary: rgba(193, 119, 74, 0.6);
+  --cloud-color: rgba(217, 144, 88, 0.12);
 
   min-height: 100vh;
   background: var(--bg-gradient);
@@ -17,40 +17,11 @@
   justify-content: center;
   transition: background 0.5s ease;
 }
+// Temas 
 
-// Temas
-.constellation-menu[data-theme="halloween"] {
-  --bg-gradient: linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 50%, #2d1b3d 100%);
-  --primary-color: #ff8c00;
-  --secondary-color: #8a2be2;
-  --accent-color: #dda0dd;
-  --glow-primary: rgba(255, 140, 0, 0.8);
-  --glow-secondary: rgba(138, 43, 226, 0.8);
-  --cloud-color: rgba(138, 43, 226, 0.08);
-}
-
-.constellation-menu[data-theme="christmas"] {
-  --bg-gradient: linear-gradient(to bottom, #0a1428 0%, #1a2850 50%, #2a3c78 100%);
-  --primary-color: #e0f4ff;
-  --secondary-color: #4dd0ff;
-  --accent-color: #ffffff;
-  --glow-primary: rgba(224, 244, 255, 0.9);
-  --glow-secondary: rgba(77, 208, 255, 0.9);
-  --cloud-color: rgba(224, 244, 255, 0.15);
-}
-
-.constellation-menu[data-theme="valentine"] {
-  --bg-gradient: linear-gradient(to bottom, #2d0a1e 0%, #4a0a2e 50%, #6d1040 100%);
-  --primary-color: #ff1493;
-  --secondary-color: #ff69b4;
-  --accent-color: #ffb6c1;
-  --glow-primary: rgba(255, 20, 147, 0.8);
-  --glow-secondary: rgba(255, 105, 180, 0.8);
-  --cloud-color: rgba(255, 105, 180, 0.08);
-}
-
+// Enero - Año Nuevo
 .constellation-menu[data-theme="new-year"] {
-  --bg-gradient: linear-gradient(to bottom, #0a0520 0%, #1a1040 50%, #2d1560 100%);
+  --bg-gradient: linear-gradient(to bottom, #2a1f5a 0%, #504c60 50%, #694ea4 100%);
   --primary-color: #ffd700;
   --secondary-color: #ff1493;
   --accent-color: #00ffff;
@@ -59,6 +30,18 @@
   --cloud-color: rgba(255, 215, 0, 0.06);
 }
 
+// Febrero - San Valentín
+.constellation-menu[data-theme="valentine"] {
+  --bg-gradient: linear-gradient(to bottom, #461932 0%, #74445e 50%, #836a77 100%);
+  --primary-color: #c06c98ff;
+  --secondary-color: #ff69b4;
+  --accent-color: #ffb6c1;
+  --glow-primary: rgba(222, 104, 167, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(255, 105, 180, 0.08);
+}
+
+// Marzo - Primavera
 .constellation-menu[data-theme="spring"] {
   --bg-gradient: linear-gradient(to bottom, #1a3a1a 0%, #2d5a2d 50%, #407a40 100%);
   --primary-color: #32cd32;
@@ -69,6 +52,40 @@
   --cloud-color: rgba(50, 205, 50, 0.06);
 }
 
+// Abril - Pascua
+.constellation-menu[data-theme="easter"] {
+  --bg-gradient: linear-gradient(to bottom, #4a2a0a 0%, #6a4a2a 50%, #8a6a4a 100%);
+  --primary-color: #ffd700;
+  --secondary-color: #ff69b4;
+  --accent-color: #87ceeb;
+  --glow-primary: rgba(255, 215, 0, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(255, 215, 0, 0.08);
+}
+
+// Mayo - Día de las Madres
+.constellation-menu[data-theme="mothers-day"] {
+  --bg-gradient: linear-gradient(to bottom, #2d1a3a 0%, #4a2a5a 50%, #6a4a7a 100%);
+  --primary-color: #ff69b4;
+  --secondary-color: #dda0dd;
+  --accent-color: #fff;
+  --glow-primary: rgba(255, 105, 180, 0.8);
+  --glow-secondary: rgba(221, 160, 221, 0.8);
+  --cloud-color: rgba(255, 105, 180, 0.08);
+}
+
+// Junio - Verano
+.constellation-menu[data-theme="summer"] {
+  --bg-gradient: linear-gradient(to bottom, #0a3a5a 0%, #1a5a8a 50%, #2a7aba 100%);
+  --primary-color: #ffd700;
+  --secondary-color: #ff8c00;
+  --accent-color: #00bfff;
+  --glow-primary: rgba(255, 215, 0, 0.8);
+  --glow-secondary: rgba(255, 140, 0, 0.8);
+  --cloud-color: rgba(255, 215, 0, 0.08);
+}
+
+// Julio - Día de Colombia
 .constellation-menu[data-theme="colombia-day"] {
   --bg-gradient: linear-gradient(to bottom, #1a1a3a 0%, #2a2a5a 50%, #3a3a7a 100%);
   --primary-color: #fcd116;
@@ -79,6 +96,40 @@
   --cloud-color: rgba(252, 209, 22, 0.06);
 }
 
+// Agosto - Cometas
+.constellation-menu[data-theme="kites"] {
+  --bg-gradient: linear-gradient(to bottom, #2a3a5a 0%, #4a5a8a 50%, #6a7aba 100%);
+  --primary-color: #00bfff;
+  --secondary-color: #ff69b4;
+  --accent-color: #ffd700;
+  --glow-primary: rgba(0, 191, 255, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(0, 191, 255, 0.08);
+}
+
+// Septiembre - Amor y Amistad
+.constellation-menu[data-theme="love-friendship"] {
+  --bg-gradient: linear-gradient(to bottom, #3a1a2a 0%, #5a2a4a 50%, #7a3a6a 100%);
+  --primary-color: #ff1493;
+  --secondary-color: #ff69b4;
+  --accent-color: #ffd700;
+  --glow-primary: rgba(255, 20, 147, 0.8);
+  --glow-secondary: rgba(255, 105, 180, 0.8);
+  --cloud-color: rgba(255, 20, 147, 0.08);
+}
+
+// Octubre - Halloween
+.constellation-menu[data-theme="halloween"] {
+  --bg-gradient: linear-gradient(to bottom, #0a0a1a 0%, #1a0a2e 50%, #2d1b3d 100%);
+  --primary-color: #ff8c00;
+  --secondary-color: #8a2be2;
+  --accent-color: #dda0dd;
+  --glow-primary: rgba(255, 140, 0, 0.8);
+  --glow-secondary: rgba(138, 43, 226, 0.8);
+  --cloud-color: rgba(138, 43, 226, 0.08);
+}
+
+// Noviembre - Acción de Gracias
 .constellation-menu[data-theme="thanksgiving"] {
   --bg-gradient: linear-gradient(to bottom, #f5f0e8 0%, #e8dcc8 50%, #d4c4a8 100%);
   --primary-color: #d4a574;
@@ -89,6 +140,16 @@
   --cloud-color: rgba(212, 165, 116, 0.12);
 }
 
+// Diciembre - Navidad
+.constellation-menu[data-theme="christmas"] {
+  --bg-gradient: linear-gradient(to bottom, #0a1428 0%, #1a2850 50%, #2a3c78 100%);
+  --primary-color: #e0f4ff;
+  --secondary-color: #4dd0ff;
+  --accent-color: #ffffff;
+  --glow-primary: rgba(224, 244, 255, 0.9);
+  --glow-secondary: rgba(77, 208, 255, 0.9);
+  --cloud-color: rgba(224, 244, 255, 0.15);
+}
 // ☁️ NUBES FLOTANTES
 .floating-clouds {
   position: absolute;

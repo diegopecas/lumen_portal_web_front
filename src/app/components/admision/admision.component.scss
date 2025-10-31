@@ -3,65 +3,100 @@
   position: relative;
   overflow: hidden;
 
-  // Variables de tema dinámico
-  &[data-theme="halloween"] {
-    --theme-primary: #ff8c00;
-    --theme-secondary: #8a2be2;
-    --theme-accent: #dda0dd;
+  // Enero - Año Nuevo
+  &[data-theme="new-year"] {
+    --theme-primary: #ffd700;
+    --theme-secondary: #c06c98ff;
+    --theme-accent: #00ffff;
+    --theme-primary-rgb: 255, 215, 0;
   }
 
-  &[data-theme="christmas"] {
-    --theme-primary: #e0f4ff;
-    --theme-secondary: #4dd0ff;
-    --theme-accent: #ffffff;
-  }
-
+  // Febrero - San Valentín
   &[data-theme="valentine"] {
     --theme-primary: #ff1493;
     --theme-secondary: #ff69b4;
     --theme-accent: #ffb6c1;
+    --theme-primary-rgb: 255, 20, 147;
   }
 
+  // Marzo - Primavera
   &[data-theme="spring"] {
     --theme-primary: #32cd32;
     --theme-secondary: #ff69b4;
     --theme-accent: #ffff00;
+    --theme-primary-rgb: 50, 205, 50;
   }
 
+  // Abril - Pascua
+  &[data-theme="easter"] {
+    --theme-primary: #ffd700;
+    --theme-secondary: #ff69b4;
+    --theme-accent: #87ceeb;
+    --theme-primary-rgb: 255, 215, 0;
+  }
+
+  // Mayo - Día de las Madres
+  &[data-theme="mothers-day"] {
+    --theme-primary: #ff69b4;
+    --theme-secondary: #dda0dd;
+    --theme-accent: #fff;
+    --theme-primary-rgb: 255, 105, 180;
+  }
+
+  // Junio - Verano
   &[data-theme="summer"] {
     --theme-primary: #ffd700;
     --theme-secondary: #ff8c00;
     --theme-accent: #00bfff;
+    --theme-primary-rgb: 255, 215, 0;
   }
 
-  &[data-theme="new-year"] {
-    --theme-primary: #ffd700;
-    --theme-secondary: #ff1493;
-    --theme-accent: #00ffff;
-  }
-
+  // Julio - Día de Colombia
   &[data-theme="colombia-day"] {
     --theme-primary: #fcd116;
     --theme-secondary: #003893;
     --theme-accent: #ce1126;
+    --theme-primary-rgb: 252, 209, 22;
   }
 
+  // Agosto - Cometas
   &[data-theme="kites"] {
     --theme-primary: #00bfff;
     --theme-secondary: #ff69b4;
     --theme-accent: #ffd700;
+    --theme-primary-rgb: 0, 191, 255;
   }
 
+  // Septiembre - Amor y Amistad
   &[data-theme="love-friendship"] {
     --theme-primary: #ff1493;
     --theme-secondary: #ff69b4;
     --theme-accent: #ffd700;
+    --theme-primary-rgb: 255, 20, 147;
   }
 
-  &[data-theme="thanksgiving"] {
+  // Octubre - Halloween
+  &[data-theme="halloween"] {
     --theme-primary: #ff8c00;
-    --theme-secondary: #8b4513;
-    --theme-accent: #ffd700;
+    --theme-secondary: #8a2be2;
+    --theme-accent: #dda0dd;
+    --theme-primary-rgb: 255, 140, 0;
+  }
+
+  // Noviembre - Acción de Gracias
+  &[data-theme="thanksgiving"] {
+    --theme-primary: #d99058;
+    --theme-secondary: #c1774a;
+    --theme-accent: #fce4d3;
+    --theme-primary-rgb: 217, 144, 88;
+  }
+
+  // Diciembre - Navidad
+  &[data-theme="christmas"] {
+    --theme-primary: #e0f4ff;
+    --theme-secondary: #4dd0ff;
+    --theme-accent: #ffffff;
+    --theme-primary-rgb: 224, 244, 255;
   }
 
   // Valores por defecto
@@ -75,7 +110,12 @@
 // ============================================
 
 .hero-section {
-  padding: 120px 20px 80px;
+  padding: 300px 20px 80px;
+
+  @media (max-width: 768px) {
+    padding: 220px 20px 60px;
+  }
+
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
   position: relative;
   overflow: hidden;
@@ -211,12 +251,10 @@
   top: 80px;
   bottom: 80px;
   width: 4px;
-  background: linear-gradient(
-    to bottom,
-    var(--theme-primary),
-    var(--theme-secondary),
-    var(--theme-accent)
-  );
+  background: linear-gradient(to bottom,
+      var(--theme-primary),
+      var(--theme-secondary),
+      var(--theme-accent));
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
   animation: lineGrow 2s ease-out;
@@ -231,6 +269,7 @@
     transform: scaleY(0);
     transform-origin: top;
   }
+
   to {
     transform: scaleY(1);
   }
@@ -319,6 +358,7 @@
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.3;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(2);
     opacity: 0;
@@ -400,9 +440,12 @@
 }
 
 @keyframes iconBounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-5px);
   }
@@ -439,9 +482,12 @@
 }
 
 @keyframes badgePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
@@ -509,9 +555,12 @@
 }
 
 @keyframes arrowBounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(5px);
   }
@@ -532,6 +581,7 @@
     max-height: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     max-height: 1000px;
@@ -596,6 +646,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -638,10 +689,13 @@
 }
 
 @keyframes dotPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
     opacity: 0.6;
   }
+
   50% {
     transform: scale(1.3);
     opacity: 1;
@@ -696,9 +750,12 @@
 }
 
 @keyframes rocketFloat {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(-5deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(5deg);
   }
@@ -717,10 +774,13 @@
 }
 
 @keyframes glowPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.3;
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.3);
     opacity: 0.5;
@@ -890,6 +950,7 @@
     transform: translateY(0) rotate(0deg);
     opacity: 1;
   }
+
   100% {
     transform: translateY(100vh) rotate(720deg);
     opacity: 0;
@@ -901,21 +962,28 @@
 // ============================================
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0);
   }
+
   33% {
     transform: translate(30px, -30px);
   }
+
   66% {
     transform: translate(-20px, 20px);
   }
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }

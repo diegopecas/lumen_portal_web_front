@@ -23,9 +23,9 @@ export class ThemeService {
     {
       name: 'new-year',
       month: 1,
-      backgroundColor: 'linear-gradient(to bottom, #0a0520 0%, #1a1040 50%, #2d1560 100%)',
+      backgroundColor: 'linear-gradient(to bottom, #2a1f5a 0%, #504c60 50%, #694ea4 100%)',
       primaryColor: '#ffd700',
-      secondaryColor: '#ff1493',
+      secondaryColor: '#c06c98ff',
       accentColor: '#00ffff',
       title: 'LICEO LUMEN',
       subtitle: '✨ Nuevo Año, Nuevos Sueños ✨',
@@ -154,9 +154,9 @@ export class ThemeService {
       name: 'thanksgiving',
       month: 11,
       backgroundColor: 'linear-gradient(to bottom, #f5f0e8 0%, #e8dcc8 50%, #d4c4a8 100%)',
-      primaryColor: '#d4a574',
-      secondaryColor: '#a67c52',
-      accentColor: '#f4e4c1',
+      primaryColor: '#d99058',
+      secondaryColor: '#c1774a',
+      accentColor: '#fce4d3',
       title: 'LICEO LUMEN',
       subtitle: '🍂 Gratitud y Abundancia 🍂',
       decorativeElements: ['🍂', '🦃', '🌾', '🍁'],
@@ -179,7 +179,7 @@ export class ThemeService {
 
   getCurrentTheme(): ThemeConfig {
     //const currentMonth = new Date().getMonth() + 1;
-    const currentMonth = 11;
+    const currentMonth = 12;
     return this.themes.find(t => t.month === currentMonth) || this.themes[9]; // Default Halloween
   }
 

@@ -462,83 +462,99 @@ $transition: all 0.3s ease;
   }
 }
 
-// Variables CSS para temas dinámicos
+
+// ========================================
+// VARIABLES CSS PARA TEMAS DINÁMICOS
+// ========================================
+
 :root {
   --theme-primary: #6366f1;
   --theme-secondary: #8b5cf6;
   --theme-primary-rgb: 99, 102, 241;
 }
 
-[data-theme="halloween"] {
-  --theme-primary: #ff8c00;
-  --theme-secondary: #8a2be2;
-  --theme-primary-rgb: 255, 140, 0;
+// Enero - Año Nuevo
+[data-theme="new-year"] {
+  --theme-primary: #ffd700;
+  --theme-secondary: #c06c98ff;
+  --theme-primary-rgb: 255, 215, 0;
 }
 
-[data-theme="christmas"] {
-  --theme-primary: #4dd0ff;
-  --theme-secondary: #e0f4ff;
-  --theme-primary-rgb: 77, 208, 255;
-}
-
+// Febrero - San Valentín
 [data-theme="valentine"] {
   --theme-primary: #ff1493;
   --theme-secondary: #ff69b4;
   --theme-primary-rgb: 255, 20, 147;
 }
 
-[data-theme="new-year"] {
-  --theme-primary: #ffd700;
-  --theme-secondary: #ff1493;
-  --theme-primary-rgb: 255, 215, 0;
-}
-
+// Marzo - Primavera
 [data-theme="spring"] {
   --theme-primary: #32cd32;
   --theme-secondary: #ff69b4;
   --theme-primary-rgb: 50, 205, 50;
 }
 
+// Abril - Pascua
 [data-theme="easter"] {
   --theme-primary: #ffd700;
   --theme-secondary: #ff69b4;
   --theme-primary-rgb: 255, 215, 0;
 }
 
+// Mayo - Día de las Madres
 [data-theme="mothers-day"] {
   --theme-primary: #ff69b4;
   --theme-secondary: #dda0dd;
   --theme-primary-rgb: 255, 105, 180;
 }
 
+// Junio - Verano
 [data-theme="summer"] {
   --theme-primary: #ffd700;
-  --theme-secondary: #00bfff;
+  --theme-secondary: #ff8c00;
   --theme-primary-rgb: 255, 215, 0;
 }
 
+// Julio - Día de Colombia
 [data-theme="colombia-day"] {
   --theme-primary: #fcd116;
-  --theme-secondary: #ce1126;
+  --theme-secondary: #003893;
   --theme-primary-rgb: 252, 209, 22;
 }
 
+// Agosto - Cometas
 [data-theme="kites"] {
   --theme-primary: #00bfff;
-  --theme-secondary: #ffd700;
+  --theme-secondary: #ff69b4;
   --theme-primary-rgb: 0, 191, 255;
 }
 
+// Septiembre - Amor y Amistad
 [data-theme="love-friendship"] {
   --theme-primary: #ff1493;
-  --theme-secondary: #ffd700;
+  --theme-secondary: #ff69b4;
   --theme-primary-rgb: 255, 20, 147;
 }
 
-[data-theme="thanksgiving"] {
+// Octubre - Halloween
+[data-theme="halloween"] {
   --theme-primary: #ff8c00;
-  --theme-secondary: #ffd700;
+  --theme-secondary: #8a2be2;
   --theme-primary-rgb: 255, 140, 0;
+}
+
+// Noviembre - Acción de Gracias
+[data-theme="thanksgiving"] {
+  --theme-primary: #d99058;
+  --theme-secondary: #c1774a;
+  --theme-primary-rgb: 217, 144, 88;
+}
+
+// Diciembre - Navidad
+[data-theme="christmas"] {
+  --theme-primary: #e0f4ff;
+  --theme-secondary: #4dd0ff;
+  --theme-primary-rgb: 224, 244, 255;
 }
 // Custom Select para programas
 .custom-select-wrapper {
