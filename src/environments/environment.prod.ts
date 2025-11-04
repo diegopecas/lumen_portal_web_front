@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.liceolumen.com/api'
+  apiUrl: 'https://api-portal.liceolumen.com/api'
 };
